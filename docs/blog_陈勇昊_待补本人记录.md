@@ -169,6 +169,7 @@ assert.equal(result.status,403);
 [当前提交记录](https://github.com/k0n0y/102401314-102401323/commits/main/)。材料生成时的真实Git记录如下，后续提交以仓库为准：
 
 ```text
+b1cead4 docs: deliver shared APK setup blog drafts and verification evidence
 7b22b2c test: verify cross-client sync authorization offline errors and APK restart
 3478c6d feat: add shared SQLite service and device-authorized Android sync
 e24fca7 docs: add real GitHub history capture final APK audit and packaging instructions
