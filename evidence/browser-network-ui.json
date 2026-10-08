@@ -1,0 +1,58 @@
+{
+  "mode": "Chromium shared UI",
+  "startedAt": "2026-10-08T04:01:40.294Z",
+  "checks": [
+    "空表单仍能阻止发布",
+    "联网版保留草稿",
+    "服务确认后才展示发布成功",
+    "独立客户端拥有不同发布者身份",
+    "乙客户端组合搜索可找到甲的新信息",
+    "乙能查看甲的详情但没有更新按钮",
+    "跨客户端详情显示发布者提供的联系方式",
+    "乙的我的发布不含甲的记录",
+    "乙直接调用更新接口仍被服务拒绝",
+    "取消确认不会更新共享状态",
+    "乙自动同步后看到甲更新为已归还",
+    "联网版搜索无结果提示可用",
+    "服务中断后仍能查看最近缓存",
+    "断网更新失败不改变显示状态",
+    "断网发布显示错误并保留表单",
+    "恢复服务后重试发布并标记已找到",
+    "共享服务重启后两条记录仍可读取",
+    "客户端重新加载后身份和记录保留",
+    "更换同一服务地址后发布者身份保留",
+    "320px 界面无横向溢出 #/home",
+    "320px 界面无横向溢出 #/search",
+    "320px 界面无横向溢出 #/publish",
+    "320px 界面无横向溢出 #/mine",
+    "320px 界面无横向溢出 #/settings"
+  ],
+  "consoleErrors": [],
+  "expectedNetworkErrors": [
+    "http://127.0.0.1:18787/api/items Failed to load resource: net::ERR_CONNECTION_REFUSED",
+    "http://127.0.0.1:18787/api/items/c1d7a1cd-2418-44cf-a450-481415b95c23/status Failed to load resource: net::ERR_CONNECTION_REFUSED",
+    "http://127.0.0.1:18787/api/items Failed to load resource: net::ERR_CONNECTION_REFUSED"
+  ],
+  "passed": true,
+  "finishedAt": "2026-10-08T04:01:53.436Z",
+  "clientA": "a55bf578-1bfd-4a51-8ee0-b38b39af879d",
+  "clientB": "afbd2ef6-9f98-4f60-8a00-04d316c37afc",
+  "items": [
+    "c1d7a1cd-2418-44cf-a450-481415b95c23",
+    "c4f10bf2-f223-45f5-b137-62f4c2432533"
+  ],
+  "screenshots": [
+    "02-home.png",
+    "03-publish.png",
+    "04-success.png",
+    "05-other-search.png",
+    "06-other-contact.png",
+    "07-mine.png",
+    "08-confirm.png",
+    "09-resolved.png",
+    "10-other-resolved.png",
+    "11-empty.png",
+    "12-offline-cache.png",
+    "13-offline-publish.png"
+  ]
+}

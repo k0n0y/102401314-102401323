@@ -1,8 +1,8 @@
 {
-  "builtAt": "2026-10-08T03:19:33.811874+00:00",
-  "apk": "shiguang-1.0.0.apk",
-  "bytes": 37652,
-  "sha256": "9583db5aea723d72b35aa2ee725a8cd190c2bbbf2a4f59ab9f2e6aebec9717df",
+  "builtAt": "2026-10-08T03:56:22.465959+00:00",
+  "apk": "shiguang-1.1.0.apk",
+  "bytes": 41811,
+  "sha256": "35f9108283de4ee921868e3816af7a2441e4d365e3832a69fdac5a9387d475dd",
   "minSdk": 26,
   "targetSdk": 35,
   "package": "edu.fzu.shiguang",

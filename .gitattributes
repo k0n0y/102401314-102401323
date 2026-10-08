@@ -1,0 +1,4 @@
+web/* -text
+*.apk binary
+*.png binary
+*.cmd text eol=crlf

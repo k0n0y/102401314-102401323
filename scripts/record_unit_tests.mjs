@@ -3,7 +3,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const args=['--experimental-test-coverage','--test','tests/domain.test.cjs'];
+const args=['--experimental-test-coverage','--test','tests/domain.test.cjs','tests/server.test.cjs'];
 const log=execFileSync(process.execPath,args,{cwd:root,encoding:'utf8',windowsHide:true});
 fs.writeFileSync(path.join(root,'evidence/unit-tests.txt'),log);
 const row=log.split(/\r?\n/).find(line=>line.includes('domain.js')&&line.includes('|'));
