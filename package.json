@@ -1,0 +1,13 @@
+{
+  "name": "shiguang-campus-lost-found",
+  "version": "1.0.0",
+  "private": true,
+  "description": "拾光校园失物招领 Android App 的共享业务模块与测试",
+  "scripts": {
+    "test": "node --test tests/domain.test.cjs",
+    "test:coverage": "node --experimental-test-coverage --test tests/domain.test.cjs",
+    "test:ui": "node scripts/verify_ui.mjs",
+    "build:apk": "python scripts/build_apk.py"
+  },
+  "engines": { "node": ">=22" }
+}

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f8f5" />
+    <meta name="description" content="拾光校园失物招领：发布、寻找、联系与更新状态。" />
+    <title>拾光 · 校园失物招领</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="domain.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+
+    <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10Z"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></symbol>
+      <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m14.5 5-7 7 7 7M8 12h12"/></symbol>
+      <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-7-7 7 7-7 7"/></symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+      <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 7h16M7 12h10m-7 5h4"/></symbol>
+      <symbol id="i-message" viewBox="0 0 24 24"><path d="M20 16a3 3 0 0 1-3 3H9l-5 3V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v9Z"/><path d="M8 10h8m-8 4h5"/></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="m12 2 1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9L12 2ZM19 17l.6 1.4L21 19l-1.4.6L19 21l-.6-1.4L17 19l1.4-.6L19 17Z"/></symbol>
+      <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.5-1.5 1.5-2 3-2s2.5.5 3 2m3-6h3m-3 4h3"/></symbol>
+      <symbol id="i-umbrella" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0H3Zm9 0v7a2 2 0 0 0 4 0"/></symbol>
+      <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 13h3v7H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 1-2Zm16 0h-3v7h2a2 2 0 0 0 2-2v-3a2 2 0 0 0-1-2Z"/></symbol>
+      <symbol id="i-keys" viewBox="0 0 24 24"><circle cx="8.5" cy="8.5" r="4.5"/><path d="m12 12 8 8m-3-3 2-2m-5-1 2-2"/></symbol>
+      <symbol id="i-bottle" viewBox="0 0 24 24"><path d="M9 3h6m-5 0v4l-3 4v8a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-8l-3-4V3M7 13h10"/></symbol>
+      <symbol id="i-box" viewBox="0 0 24 24"><path d="m3 7 9-4 9 4v10l-9 4-9-4V7Zm0 0 9 4 9-4m-9 4v10"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18"/></symbol>
+    </svg>
+
+    <div class="site-layout">
+      <aside class="showcase" aria-label="应用介绍">
+        <div class="showcase-top"><span class="showcase-mark">拾</span><span>拾光 · 校园失物招领</span></div>
+        <div class="showcase-body">
+          <span class="eyebrow"><span class="eyebrow-dot"></span> ANDROID APP · 校园拾光</span>
+          <h2>让每一次<br /><em>失而复得</em>更近一点。</h2>
+          <p>把散落在群聊里的寻物与招领信息，整理到同一个清晰的入口。浏览、搜索、发布，几步就能完成。</p>
+          <div class="showcase-points" aria-label="应用功能">
+            <div><span>01</span><strong>集中浏览</strong><small>快速查看最新线索</small></div>
+            <div><span>02</span><strong>精准搜索</strong><small>按关键词找到物品</small></div>
+            <div><span>03</span><strong>便捷发布</strong><small>失物与招领都能登记</small></div>
+          </div>
+        </div>
+        <p class="showcase-foot">离线版 · 信息保存在当前设备</p>
+      </aside>
+      <div class="phone-stage">
+        <div class="phone-frame">
+          <div id="app" class="app-shell"></div>
+          <div id="toast" class="toast" role="status" aria-live="polite"></div>
+        </div>
+        <p class="stage-caption">拾光 · 让线索相遇，让物品回家</p>
+      </div>
+    </div>
+  </body>
+</html>
