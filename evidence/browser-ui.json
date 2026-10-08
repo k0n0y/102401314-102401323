@@ -1,6 +1,6 @@
 {
   "mode": "Chromium shared UI",
-  "startedAt": "2026-10-08T03:16:46.298Z",
+  "startedAt": "2026-10-08T03:29:04.845Z",
   "checks": [
     "首页展示寻物和招领样例",
     "点击卡片能查看详情",
@@ -30,7 +30,7 @@
   ],
   "consoleErrors": [],
   "passed": true,
-  "finishedAt": "2026-10-08T03:16:56.241Z",
+  "finishedAt": "2026-10-08T03:29:14.850Z",
   "screenshots": [
     "01-home.png",
     "02-detail.png",

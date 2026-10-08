@@ -30,8 +30,14 @@ def arrow(d,points,label=None):
     tip=[(x1,y1),(x1-20*math.cos(angle-.5),y1-20*math.sin(angle-.5)),(x1-20*math.cos(angle+.5),y1-20*math.sin(angle+.5))]
     d.polygon(tip,fill=teal)
     if label:
-        midpoint=points[len(points)//2]
-        d.text((midpoint[0]+(92 if x0==x1 else 0),midpoint[1]-27),label,font=font(25),fill=muted,anchor='mm')
+        segments=list(zip(points[:-1],points[1:]))
+        a,b=max(segments,key=lambda segment:math.dist(*segment))
+        midpoint=((a[0]+b[0])/2,(a[1]+b[1])/2)
+        size=25
+        if a[1]==b[1]:
+            while size>15 and d.textbbox((0,0),label,font=font(size))[2]>abs(a[0]-b[0])-20:size-=1
+        vertical_offset=(-160 if b[1]>a[1] else 160) if a[0]==b[0] else 0
+        d.text((midpoint[0]+vertical_offset,midpoint[1]-27),label,font=font(size),fill=muted,anchor='mm')
 
 im,d=canvas('从发布到完成，状态保持一致','核心流程：校验与保存成功后反馈；只有发布者能确认找回或归还')
 xs=[70,460,850,1240,1630,2020]

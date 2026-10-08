@@ -99,7 +99,17 @@ try {
   await cdp.eval(`document.querySelector('[data-action="contact"]').click()`);
   await check(`document.querySelector('.contact-value').textContent===${JSON.stringify(expectedContact)}`,'详情显示发布者提供的联系方式');
   if(android){await cdp.eval(`document.querySelector('[data-action="copy-contact"]').click()`);await check(`document.querySelector('#toast').textContent==='联系方式已复制'`,'安卓剪贴板复制成功');}
+  if(android)await delay(3600);
   await shot('03-contact.png');await cdp.eval(`document.querySelector('[data-action="close-dialog"]').click()`);
+  if(android && adb){
+    execFileSync(adb,['shell','input','keyevent','4'],{windowsHide:true});
+    await wait(`location.hash==='#/home' && !!document.querySelector('.hero')`,'native back');
+    await check(`location.hash==='#/home'`,'安卓返回键从详情回首页');
+    await nav('#/detail/demo-card');await cdp.eval(`document.querySelector('[data-action="contact"]').click()`);
+    execFileSync(adb,['shell','input','keyevent','4'],{windowsHide:true});
+    await wait(`!document.querySelector('.dialog-backdrop')`,'native dialog back');
+    await check(`location.hash.startsWith('#/detail/')`,'安卓返回键优先关闭联系弹窗');
+  }
   await nav('#/publish');await shot('04-publish.png');
   await cdp.eval(`document.querySelector('#publish-form').requestSubmit()`);
   await check(`location.hash==='#/publish' && !document.querySelector('#form-error').hidden`,'空表单给出错误并阻止发布');

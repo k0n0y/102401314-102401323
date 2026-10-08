@@ -166,7 +166,7 @@ test('U19 其他使用者和访客不能更新他人状态', () => {
 
 采用白盒分支设计，同时使用等价类和边界值。必填项分别验证空值与纯空格，长度验证上限和上限加一，时间验证非法、未来与恰好等于当前。搜索验证多字段命中、多词、空结果与条件冲突；权限验证本人、他人、访客；存储验证正常写入、返回 false、抛异常与损坏恢复。固定时间和 ID，使测试可以重复。
 
-本地实测：**31/31 个单元测试通过**；`domain.js` 行覆盖 98.86%，分支覆盖 92.39%，函数覆盖 100%。另外 **25 项浏览器检查、22 项 Android 12 安装版检查通过**，覆盖原生复制与强制停止后重开保存。日志在 evidence 中可核查。
+本地实测：**31/31 个单元测试通过**；`domain.js` 行覆盖 98.86%，分支覆盖 92.39%，函数覆盖 100%。另外 **25 项浏览器检查、24 项 Android 12 安装版检查通过**，覆盖原生复制与强制停止后重开保存。日志在 evidence 中可核查。
 
 这些用例能覆盖主要业务和失败分支，但不能证明所有机型或真实使用场景都没有问题。UI 检查和单元测试不是助教官方评分；手机人工试玩记录仍待本人补充。
 
@@ -175,6 +175,7 @@ test('U19 其他使用者和访客不能更新他人状态', () => {
 当前本地真实提交记录如下，保留实施进展，不伪造另一名成员的签入：
 
 ```text
+e2f6cbb docs: deliver verified APK screenshots test evidence and coursework blog drafts
 65a617a test: verify installed APK clipboard persistence and shared domain edge cases
 e26152c fix: clear stale feedback and serve local app icon in portrait WebView
 4b6c586 feat: implement persistent Android lost-and-found publishing search and owner status flow
@@ -183,7 +184,9 @@ ced7bf6 docs: record assignment scope and PSP estimates before implementation
 
 [GitHub 提交记录页面](https://github.com/k0n0y/102401314-102401323/commits/main/)。
 
-【此处插入实际 GitHub 提交记录页面截图；本地 log 不代替要求的截图。】
+![实际 GitHub 提交记录页面](images/github-commits.png)
+
+截图直接来自公开的 GitHub 提交页；截图拍摄时的记录可能少于当前提交数，以仓库实时历史为准。
 
 【待填另一成员真实 fork 地址与 Pull Request 链接。】另一成员应在自己的 GitHub 账号完成真实贡献并 PR，例如手机试玩发现问题后补测试或修复；不能用同一账号创建空提交冒充两人协作。群内结对表和项目地址仍需两人核对并填写。
 

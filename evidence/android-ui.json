@@ -1,12 +1,14 @@
 {
   "mode": "Android WebView on installed APK",
-  "startedAt": "2026-10-08T03:20:54.358Z",
+  "startedAt": "2026-10-08T03:29:55.151Z",
   "checks": [
     "首页展示寻物和招领样例",
     "安装 APK 加载原生存储桥和全屏界面",
     "点击卡片能查看详情",
     "详情显示发布者提供的联系方式",
     "安卓剪贴板复制成功",
+    "安卓返回键从详情回首页",
+    "安卓返回键优先关闭联系弹窗",
     "空表单给出错误并阻止发布",
     "纯空格标题被拒绝",
     "未来发生时间被拒绝",
@@ -28,7 +30,7 @@
   "consoleErrors": [],
   "androidVersion": "12",
   "passed": true,
-  "finishedAt": "2026-10-08T03:21:07.329Z",
+  "finishedAt": "2026-10-08T03:30:12.107Z",
   "screenshots": [
     "01-home.png",
     "02-detail.png",
