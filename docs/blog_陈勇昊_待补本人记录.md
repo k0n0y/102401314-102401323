@@ -162,13 +162,14 @@ assert.equal(result.status,403);
 
 **实测55/55个测试通过，24项独立浏览器界面检查、21项APK与独立客户端检查通过。** domain.js行覆盖98.86%、分支92.39%、函数100%；网络服务的覆盖率另在日志中，不能以domain覆盖率代替整个App。
 
-检查包括甲发布乙读取、越权403、甲更新乙自动同步、服务中断、缓存、写入失败、恢复重试、数据库重启、身份和记录重开保留。日志在evidence/unit-tests.txt及带network的JSON。APK检查还覆盖原生剪贴板和返回键。尚无两位本人实体手机试玩记录；这些结果不等同于助教评分。
+检查包括甲发布乙读取、越权403、甲更新乙自动同步、服务中断、缓存、写入失败、恢复重试、数据库重启、身份和记录重开保留。日志在evidence/unit-tests.txt及带network的JSON。APK检查还覆盖原生剪贴板和返回键。作业未强制实体手机，可以在安卓模拟器进行本人操作验收并如实记录环境；目前没有两位本人实体手机试玩记录。这些结果不等同于助教评分。
 
 ## 八、GitHub签入记录与协作
 
 [当前提交记录](https://github.com/k0n0y/102401314-102401323/commits/main/)。材料生成时的真实Git记录如下，后续提交以仓库为准：
 
 ```text
+ef3e2f8 docs: refresh published commit evidence and final shared workflow
 b1cead4 docs: deliver shared APK setup blog drafts and verification evidence
 7b22b2c test: verify cross-client sync authorization offline errors and APK restart
 3478c6d feat: add shared SQLite service and device-authorized Android sync

@@ -79,4 +79,4 @@ python scripts/build_apk.py --sdk C:\Android\Sdk --jdk C:\Java\jdk-17
 
 作业未明确要求公网托管，局域网共享服务可复现要求的完整流程。若要不同网络长期访问，可在有持久磁盘的服务器运行相同服务，加域名和HTTPS反向代理，再在App填写HTTPS根地址。见 [docs/server-deployment.md](docs/server-deployment.md)。当前没有已上线的公网URL。
 
-两人的博客链接、PSP实际耗时、真实分工、另一成员fork/PR、实体手机人工体验和班级提交仍需本人完成，详见 [docs/submission-checklist.md](docs/submission-checklist.md)。
+两人的博客链接、PSP实际耗时、真实分工、另一成员fork/PR、本人操作验收和班级提交仍需完成，详见 [docs/submission-checklist.md](docs/submission-checklist.md)。本人操作验收可以使用安卓模拟器，截图中的作业要求没有强制实体手机；请如实注明测试环境。

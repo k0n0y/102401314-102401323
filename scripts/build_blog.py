@@ -145,7 +145,7 @@ assert.equal(result.status,403);
 
 **实测{unit['passed']}/{unit['tests']}个测试通过，{len(browser['checks'])}项独立浏览器界面检查、{len(android['checks'])}项APK与独立客户端检查通过。** domain.js行覆盖{unit['domainCoverage']['lines']}%、分支{unit['domainCoverage']['branches']}%、函数{unit['domainCoverage']['functions']}%；网络服务的覆盖率另在日志中，不能以domain覆盖率代替整个App。
 
-检查包括甲发布乙读取、越权403、甲更新乙自动同步、服务中断、缓存、写入失败、恢复重试、数据库重启、身份和记录重开保留。日志在evidence/unit-tests.txt及带network的JSON。APK检查还覆盖原生剪贴板和返回键。尚无两位本人实体手机试玩记录；这些结果不等同于助教评分。
+检查包括甲发布乙读取、越权403、甲更新乙自动同步、服务中断、缓存、写入失败、恢复重试、数据库重启、身份和记录重开保留。日志在evidence/unit-tests.txt及带network的JSON。APK检查还覆盖原生剪贴板和返回键。作业未强制实体手机，可以在安卓模拟器进行本人操作验收并如实记录环境；目前没有两位本人实体手机试玩记录。这些结果不等同于助教评分。
 
 ## 八、GitHub签入记录与协作
 
