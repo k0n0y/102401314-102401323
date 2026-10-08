@@ -1,63 +1,69 @@
-/* 拾光 Android App：交互界面与本机持久化，业务逻辑位于 domain.js。 */
+/* 拾光共享 App：服务确认写入，设备保存凭证与缓存。 */
 (() => {
   "use strict";
 
   const D = window.Shiguang;
   if (window.AndroidStore) document.body.classList.add('android');
-  const STORAGE_KEY = "shiguang-app-state-v1";
+  const N = window.ShiguangNet;
   const CATEGORY_ICONS = { "校园卡": "id", "雨伞": "umbrella", "耳机": "headphones", "钥匙": "keys", "水杯": "bottle", "其他": "box" };
-  const DEMO_ITEMS = [
-    {
-      id: "demo-card", kind: "lost", category: "校园卡", title: "寻找一张蓝色校园卡",
-      description: "卡面是蓝色的，可能落在教学楼 B 区一层自习室。若有同学拾到，请通过下方线索联系我，非常感谢！",
-      place: "教学楼 B 区", occurredAt: "2026-09-23T18:10", postedAt: "2026-09-23T19:05",
-      contact: "演示联系方式：教学楼服务台留言", status: "open", ownerId: "sample"
-    },
-    {
-      id: "demo-umbrella", kind: "found", category: "雨伞", title: "食堂门口拾到一把黑色雨伞",
-      description: "黑色折叠伞，伞柄有一条浅灰色挂绳。已暂放在食堂一楼服务台，可描述细节后领取。",
-      place: "一号食堂门口", occurredAt: "2026-09-23T12:20", postedAt: "2026-09-23T13:10",
-      contact: "演示联系方式：一号食堂服务台", status: "open", ownerId: "sample"
-    },
-    {
-      id: "demo-headphones", kind: "lost", category: "耳机", title: "找一副白色无线耳机",
-      description: "白色耳机盒，外壳贴有小星星贴纸。周二晚可能遗落在图书馆三楼。拾到的同学请联系，谢谢。",
-      place: "图书馆三楼", occurredAt: "2026-09-22T20:30", postedAt: "2026-09-23T09:24",
-      contact: "演示联系方式：图书馆前台留言", status: "open", ownerId: "sample"
-    },
-    {
-      id: "demo-keys", kind: "found", category: "钥匙", title: "操场看台拾到一串钥匙",
-      description: "共三把钥匙，挂着一枚绿色小挂件。物品已交给体育馆值班室，领取时请说明挂件样式。",
-      place: "东区操场看台", occurredAt: "2026-09-22T17:40", postedAt: "2026-09-22T18:15",
-      contact: "演示联系方式：体育馆值班室", status: "open", ownerId: "sample"
-    },
-    {
-      id: "demo-bottle", kind: "found", category: "水杯", title: "找到一只浅绿色保温杯",
-      description: "浅绿色金属保温杯，杯身有卡通贴纸。暂放在图书馆失物招领处。",
-      place: "图书馆二楼", occurredAt: "2026-09-21T15:20", postedAt: "2026-09-21T16:00",
-      contact: "演示联系方式：图书馆失物招领处", status: "resolved", ownerId: "sample"
-    }
-  ];
-
-  const app = document.getElementById("app");
-  const toast = document.getElementById("toast");
-  const storage = window.AndroidStore ? {
-    getItem: () => AndroidStore.read(),
-    setItem: (_key, value) => AndroidStore.save(value)
-  } : localStorage;
-  let state;
+  const app = document.getElementById("app"), toast = document.getElementById("toast");
+  const KEY='shiguang-network-v2';
+  let saved={version:2,base:'',profiles:{}};
   try {
-    state = D.decodeState(storage.getItem(STORAGE_KEY), DEMO_ITEMS);
-    D.commit(state, storage);
-  } catch (error) {
-    app.innerHTML = '<main class="page-pad"><h1>无法读取本地数据</h1><p>' + D.escapeHtml(error.message) + '</p><p>请保留应用数据，检查存储空间并重启 App。不要清除数据。</p></main>';
-    return;
+    const raw=window.AndroidStore ? AndroidStore.readNetwork() : localStorage.getItem(KEY);
+    if(raw) { saved=JSON.parse(raw);if(saved.version!==2||typeof saved.profiles!=='object'||!saved.profiles)throw Error('本机连接记录损坏'); }
+  } catch(error) { app.textContent='无法读取连接记录，请保留应用数据并检查存储空间。'+error.message;return; }
+  let state={currentUser:'',items:[]}, online=false, syncing=false, viewDirty=false, syncMessage='请先连接共享服务', lastSync='';
+  function profile() { return saved.profiles[saved.base] || {session:null,items:[]}; }
+  function writeSaved(next=saved) {
+    const raw=JSON.stringify(next);
+    const result=window.AndroidStore ? AndroidStore.saveNetwork(raw) : localStorage.setItem(KEY,raw);
+    if(result===false)throw Error('无法保存连接凭证，请检查设备存储空间');
+    saved=next;
   }
-  function applyState(next) {
-    try { state = D.commit(next, storage); return true; }
-    catch (error) { showToast(error.message || '保存失败，请重试'); return false; }
+  function readProfile() { const p=profile();state={currentUser:p.session?.ownerId||'',items:p.items||[]}; }
+  readProfile();
+  function myItems() { return state.items.filter(item=>item.ownerId===state.currentUser); }
+  function networkNotice() {return `<div class="network-notice" role="status"><span id="sync-text">${escapeHtml(syncMessage)}</span><button class="inline-link" type="button" data-action="refresh">刷新</button><a class="inline-link" href="#/settings">连接设置</a></div>`;}
+  function updateNotice(){const el=document.getElementById('sync-text');if(el)el.textContent=syncMessage;}
+  async function refresh({rerender=true}={}) {
+    if(!saved.base||syncing)return false;
+    syncing=true;
+    try {
+      const data=await N.request(saved.base,'/api/items');
+      if(!Array.isArray(data.items))throw Error('共享服务数据格式异常');
+      const changed=JSON.stringify(state.items)!==JSON.stringify(data.items);
+      viewDirty=viewDirty||changed;
+      state.items=data.items;online=true;lastSync=new Date().toLocaleTimeString('zh-CN',{hour12:false});syncMessage='已连接共享服务 · '+lastSync;
+      try { writeSaved({...saved,profiles:{...saved.profiles,[saved.base]:{...profile(),items:data.items}}}); }
+      catch(error){syncMessage='数据已同步，缓存保存失败：'+error.message;}
+      const route=parseRoute().page;
+      if(rerender&&viewDirty&&!['publish','settings'].includes(route)&&!app.querySelector('.dialog-backdrop')&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))render();
+      updateNotice();return true;
+    } catch(error) {online=false;syncMessage='未连接服务 · 当前仅显示缓存';updateNotice();return false;}
+    finally{syncing=false;}
   }
-  function myItems() { return D.mine(state); }
+  async function connect(raw) {
+    const base=N.normalizeBase(raw);
+    const health=await N.request(base,'/api/health');
+    if(!health.ok||typeof health.serverId!=='string')throw Error('请填写拾光共享服务地址');
+    let p=Object.values(saved.profiles).find(entry=>entry.serverId===health.serverId)||{session:null,items:[]};
+    if(p.session){const me=await N.request(base,'/api/me','GET',null,p.session.token);p={...p,session:{...p.session,ownerId:me.ownerId}};}
+    else p={...p,session:await N.request(base,'/api/sessions','POST',{})};
+    p={...p,serverId:health.serverId};
+    writeSaved({...saved,base,profiles:{...saved.profiles,[base]:p}});readProfile();
+    if(!await refresh({rerender:false}))throw Error('连接未完成，请重试');
+    location.hash='#/home';render();
+  }
+  function requireSession(){if(!saved.base||!profile().session)throw Error('请先在连接设置中连接共享服务');return profile().session.token;}
+  async function acceptItem(item) {
+    state.items=[item,...state.items.filter(x=>x.id!==item.id)];online=true;
+    syncMessage='共享服务已保存 · '+new Date().toLocaleTimeString('zh-CN',{hour12:false});
+    try{writeSaved({...saved,profiles:{...saved.profiles,[saved.base]:{...profile(),items:state.items}}});}catch(error){showToast('服务已保存，但本机缓存保存失败');}
+  }
+  function renderSettings() {
+    return shell(subbar('连接共享服务','#/home'),`<div class="page-pad"><h1 class="screen-title" id="page-title">让线索相遇</h1><p class="screen-subtitle">不同手机连接同一个服务，就能共享信息和处理状态。</p><form id="connect-form" class="publish-form"><label for="server-address">共享服务地址</label><input class="text-field" id="server-address" type="url" required placeholder="http://192.168.1.5:8787" value="${escapeHtml(saved.base)}"><p class="field-hint">电脑双击“启动共享服务.cmd”，填写窗口显示的地址。手机与电脑须在同一局域网；公网服务使用 HTTPS。</p><button class="button full" type="submit">连接并同步</button><p id="connect-error" class="form-error" role="alert" hidden></p></form><div class="notice"><span>每台设备自动获取独立发布者凭证，只有原发布设备能更新自己的信息。清除应用数据后凭证无法恢复，请保留原设备数据。旧版离线记录仍保留在旧存储，需重新发布到共享服务。</span></div></div>`,'mine');
+  }
   let activeDialogTrigger = null;
   let toastTimer = null;
 
@@ -116,7 +122,7 @@
   }
 
   function shell(header, main, active) {
-    return `${header}<main id="main-content" class="page-main" tabindex="-1">${main}</main>${nav(active)}`;
+    return `${header}${networkNotice()}<main id="main-content" class="page-main" tabindex="-1">${main}</main>${nav(active)}`;
   }
 
   function renderHome() {
@@ -135,8 +141,8 @@
         <a class="quick-card found" href="#/search?kind=found"><strong>我捡到东西</strong><small>帮失主找到回家的路</small><span class="quick-icon">${icon("check")}</span></a>
       </div>
       <div class="section-heading"><h2>最新线索</h2><a class="inline-link" href="#/search">查看全部 ${icon("chevron-right")}</a></div>
-      <div class="item-list">${latest.map((item) => itemCard(item, "home")).join("")}</div>
-      <div class="notice">${icon("sparkle")}<span>离线版：当前设备共享信息。带“示例”标识的是虚构样例。</span></div>
+      <div class="item-list">${latest.length ? latest.map((item) => itemCard(item, "home")).join("") : '<div class="empty-state"><h2>等待第一条线索</h2><p>连接共享服务后，发布一条寻物或招领信息吧。</p></div>'}</div>
+      <div class="notice">${icon("sparkle")}<span>正式信息由共享服务保存。其他设备连接同一服务即可查看；断网时显示最近缓存。</span></div>
     </div>`;
     return shell(topbar(), main, "home");
   }
@@ -183,7 +189,7 @@
         <div class="field-group"><label for="place">地点 <span class="required" aria-label="必填">*</span></label><input class="text-field" id="place" name="place" required maxlength="50" placeholder="例如：图书馆三楼" /></div></div>
         <div class="field-group"><label for="description">详细描述 <span class="required" aria-label="必填">*</span></label><textarea class="text-field" id="description" name="description" required maxlength="300" placeholder="写下颜色、外观、明显特征及补充线索"></textarea><p class="field-hint">描述越具体，失主和拾获者越容易确认。</p></div>
         <div class="field-group"><label for="contact">联系方式 <span class="required" aria-label="必填">*</span></label><input class="text-field" id="contact" name="contact" required maxlength="80" placeholder="例如：微信号、服务台位置" /><p class="field-hint">详情页会展示此内容；请勿填写敏感隐私。</p></div>
-        <div class="form-note">${icon("sparkle")}<span>联系方式会向本机使用者展示，请勿填写完整证件号。内容保存在当前设备，不跨设备同步。</span></div>
+        <div class="form-note">${icon("sparkle")}<span>联系方式会向共享服务的使用者展示。请填写便于联系的信息，确认发布后由服务保存。</span></div>
         <p class="form-error" id="form-error" role="alert" hidden></p><div class="form-actions"><button class="button full" type="submit">确认发布 ${icon("arrow-right")}</button></div>
       </form>`;
     return shell(topbar(), main, "publish");
@@ -192,7 +198,7 @@
   function renderSuccess(id) {
     const item = findItem(id);
     const card = item ? `<div class="success-card"><small>${kindLabel(item.kind)}信息 · ${statusLabel(item)}</small><strong>${escapeHtml(item.title)}</strong></div>` : "";
-    const main = `<div class="success-wrap"><span class="success-icon">${icon("check")}</span><h1 id="page-title">发布成功！</h1><p>这条${item ? kindLabel(item.kind) : ""}信息已保存到当前设备的列表。可以继续查看详情，或回首页浏览其他线索。</p>${card}
+    const main = `<div class="success-wrap"><span class="success-icon">${icon("check")}</span><h1 id="page-title">发布成功！</h1><p>这条${item ? kindLabel(item.kind) : ""}信息已由共享服务保存，其他设备刷新后即可看到。可以继续查看详情，或回首页浏览其他线索。</p>${card}
       <div class="success-actions">${item ? `<a class="button full" href="#/detail/${encodeURIComponent(item.id)}?from=success">查看发布详情 ${icon("arrow-right")}</a>` : ""}<a class="button secondary full" href="#/home">返回首页</a></div></div>`;
     return shell(subbar("发布完成", "#/home"), main, "publish");
   }
@@ -226,7 +232,7 @@
   function renderMine() {
     const userItems = myItems();
     const cards = userItems.length ? `<div class="item-list">${userItems.map(item => `<article class="mine-card"><a class="mine-card-head" href="#/detail/${encodeURIComponent(item.id)}?from=mine">${categoryArt(item)}<span><strong>${escapeHtml(item.title)}</strong><small>${kindLabel(item.kind)} · ${statusLabel(item)}</small></span></a><div class="mine-actions"><a class="button ghost" href="#/detail/${encodeURIComponent(item.id)}?from=mine">查看详情</a><button type="button" class="button secondary" data-action="toggle-status" data-id="${escapeHtml(item.id)}">${item.status === 'resolved' ? '恢复进行中' : `标记${item.kind === 'found' ? '已归还' : '已找到'}`}</button></div></article>`).join('')}</div>` : `<div class="empty-state mine-empty"><span class="empty-icon">${icon('box')}</span><h2>还没有发布记录</h2><p>发布的信息会保存在这里，由你更新处理状态。</p><a class="button secondary" href="#/publish">去发布信息</a></div>`;
-    return shell(topbar(), `<div class="page-pad"><h1 class="screen-title" id="page-title">我的发布</h1><p class="screen-subtitle">找到物品后，及时告诉正在寻找的人。</p><div class="mine-banner"><span class="mine-avatar">${icon('user')}</span><strong>${D.USERS[state.currentUser]}，你好</strong><p>当前为设备内身份，用于区分发布者，无需注册。</p><label>切换使用者 <select class="text-field" id="user-select">${Object.entries(D.USERS).map(([id,label]) => `<option value="${id}" ${state.currentUser === id ? 'selected' : ''}>${label}</option>`).join('')}</select></label></div><div class="section-heading"><h2>我发布的信息</h2><span>${userItems.length} 条</span></div>${cards}<div class="notice"><span>信息存于当前设备；卸载或清除应用数据会丢失记录。本版不跨设备同步，身份切换不是账号认证。</span></div></div>`, 'mine');
+    return shell(topbar(), `<div class="page-pad"><h1 class="screen-title" id="page-title">我的发布</h1><p class="screen-subtitle">找到物品后，及时告诉正在寻找的人。</p><div class="mine-banner"><span class="mine-avatar">${icon('user')}</span><strong>我的发布者身份</strong><p>${state.currentUser ? '设备编号 '+escapeHtml(state.currentUser.slice(0,8)) : '请先连接共享服务'}</p><a class="button secondary" href="#/settings">连接设置</a></div><div class="section-heading"><h2>我发布的信息</h2><span>${userItems.length} 条</span></div>${cards}<div class="notice"><span>凭证只保存在本设备，服务核验后才允许修改。其他设备可搜索你的信息和最新状态。</span></div></div>`, 'mine');
   }
 
   function safeDecode(value) { try { return decodeURIComponent(value); } catch { return ''; } }
@@ -239,6 +245,7 @@
   }
 
   function render({ focus = false } = {}) {
+    viewDirty=false;
     clearTimeout(toastTimer);
     toast.classList.remove('visible');
     const route = parseRoute();
@@ -249,6 +256,7 @@
       case "success": html = renderSuccess(route.id); break;
       case "detail": html = renderDetail(route.id, route.params); break;
       case "mine": html = renderMine(); break;
+      case "settings": html = renderSettings(); break;
       default: html = renderHome(); break;
     }
     app.innerHTML = html;
@@ -303,7 +311,14 @@
       }
     } catch { /* 草稿可丢弃，不覆盖正式信息 */ }
   }
-  app.addEventListener('submit', event => {
+  app.addEventListener('submit', async event => {
+    if(event.target.id==='connect-form'){
+      event.preventDefault();const button=event.target.querySelector('button');button.disabled=true;
+      app.querySelector('#connect-error').hidden=true;
+      try{await connect(app.querySelector('#server-address').value.trim());showToast('已连接共享服务');}
+      catch(error){const box=app.querySelector('#connect-error');if(box){box.hidden=false;box.textContent=error.message;}}
+      finally{button.disabled=false;}return;
+    }
     const form = event.target;
     if (form.id === 'search-form') { event.preventDefault(); searchRoute(); return; }
     if (form.id !== 'publish-form') return;
@@ -320,11 +335,20 @@
       return;
     }
     try {
-      const id = 'post-' + (globalThis.crypto?.randomUUID?.() || Date.now() + '-' + Math.random().toString(36).slice(2));
-      const next = D.publish(state, input, { id });
-      if (!applyState(next)) return;
-      try { localStorage.removeItem('draft-' + state.currentUser); } catch {}
-      location.hash = '#/success/' + encodeURIComponent(id);
+      const token=requireSession();
+      const draftKey='request-'+state.currentUser;
+      let previous;try{previous=JSON.parse(localStorage.getItem(draftKey)||'null');}catch{}
+      const fingerprint=JSON.stringify(input);
+      const requestKey=previous?.fingerprint===fingerprint ? previous.key : (crypto.randomUUID?.()||Date.now()+'-'+Math.random().toString(36).slice(2));
+      localStorage.setItem(draftKey,JSON.stringify({fingerprint,key:requestKey}));
+      const button=form.querySelector('[type="submit"]');button.disabled=true;button.textContent='正在提交…';
+      try {
+        const {item}=await N.request(saved.base,'/api/items','POST',{...input,occurredAt:new Date(input.occurredAt).toISOString(),requestKey},token);
+        await acceptItem(item);
+        try{localStorage.removeItem('draft-'+state.currentUser);localStorage.removeItem(draftKey);}catch{}
+        location.hash='#/success/'+encodeURIComponent(item.id);
+      } finally { button.disabled=false;button.textContent='确认发布'; }
+
     } catch (error) { errorBox.hidden = false; errorBox.textContent = error.message; showToast(error.message); }
   });
 
@@ -339,13 +363,14 @@
     }
   });
 
-  app.addEventListener("click", (event) => {
+  app.addEventListener("click", async (event) => {
     const target = event.target.closest("[data-action]");
     if (!target) {
       if (event.target.classList.contains("dialog-backdrop")) closeContact();
       return;
     }
     const action = target.dataset.action;
+    if(action==='refresh'){await refresh();render();showToast(online?'信息已同步':'未连接服务，请检查连接设置');return;}
     if (action === 'filter' || action === 'apply-filter') {
       searchRoute(action === 'filter' ? target.dataset.kind : undefined);
     } else if (action === "contact") {
@@ -373,17 +398,15 @@
       app.append(overlay); overlay.querySelector('button').focus();
     } else if (action === 'confirm-status') {
       try {
-        const next = D.setStatus(state, target.dataset.id, target.dataset.status);
-        if (!applyState(next)) return;
-        const label = statusLabel(next.items.find(item => item.id === target.dataset.id));
-        render(); showToast('状态已更新为“' + label + '”');
-      } catch (error) { showToast(error.message); }
+        target.disabled=true;
+        const {item}=await N.request(saved.base,'/api/items/'+encodeURIComponent(target.dataset.id)+'/status','PATCH',{status:target.dataset.status},requireSession());
+        await acceptItem(item);
+        render();showToast('状态已更新为“'+statusLabel(item)+'”');
+      } catch (error) { target.disabled=false; showToast(error.message); }
     }
   });
   app.addEventListener('change', event => {
-    if (event.target.id === 'user-select') {
-      if (applyState(D.switchUser(state, event.target.value))) { render(); showToast('已切换设备内身份'); }
-    } else if (['filter-category','filter-status'].includes(event.target.id)) searchRoute();
+    if (['filter-category','filter-status'].includes(event.target.id)) searchRoute();
   });
   window.appBack = function () {
     if (app.querySelector('.dialog-backdrop')) { closeContact(); return true; }
@@ -409,4 +432,9 @@
   window.addEventListener("hashchange", () => render({ focus: true }));
   if (!location.hash) location.hash = "#/home";
   render();
+  if(saved.base)refresh();
+  else if(['http:','https:'].includes(location.protocol)&&location.hostname!=='appassets.androidplatform.net')connect(location.origin).catch(error=>{syncMessage=error.message;updateNotice();});
+  else location.hash='#/settings';
+  setInterval(()=>{if(!document.hidden)refresh();},5000);
+  window.addEventListener('online',()=>refresh());
 })();

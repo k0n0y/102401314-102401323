@@ -23,11 +23,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-/** 单一离线入口：只加载内置资源，不请求网络或设备敏感权限。 */
+/** 内置页面与共享 API 分开：网络调用由后台线程执行，凭证保存在应用私有空间。 */
 public class MainActivity extends Activity {
     private WebView web;
-    private final Set<String> assets = new HashSet<>(Arrays.asList("index.html", "styles.css", "domain.js", "app.js", "favicon.svg"));
+    private final Set<String> assets = new HashSet<>(Arrays.asList("index.html", "styles.css", "domain.js", "network.js", "app.js", "favicon.svg"));
+    private final ExecutorService network = Executors.newFixedThreadPool(2);
     private static final String HOST = "appassets.androidplatform.net";
 
     @Override public void onCreate(Bundle savedInstanceState) {
@@ -84,11 +91,12 @@ public class MainActivity extends Activity {
         });
     }
     @Override protected void onDestroy() {
+        network.shutdownNow();
         if (web != null) { web.removeJavascriptInterface("AndroidStore"); web.destroy(); }
         super.onDestroy();
     }
     /** 同步 commit，只有磁盘保存成功才允许前端呈现发布成功。 */
-    private static class LocalStore {
+    private class LocalStore {
         private final SharedPreferences preferences;
         private final Context context;
         LocalStore(Context context) {
@@ -96,6 +104,49 @@ public class MainActivity extends Activity {
             this.preferences = this.context.getSharedPreferences("shiguang", Context.MODE_PRIVATE);
         }
         @JavascriptInterface public synchronized String read() { return preferences.getString("state", ""); }
+        @JavascriptInterface public synchronized String readNetwork() { return preferences.getString("network-state", ""); }
+        @JavascriptInterface public synchronized boolean saveNetwork(String raw) {
+            if (raw == null || raw.length() > 2_000_000) return false;
+            try {
+                JSONObject data = new JSONObject(raw);
+                if (data.getInt("version") != 2) return false;
+                return preferences.edit().putString("network-state", raw).commit();
+            } catch (Exception exception) { return false; }
+        }
+        @JavascriptInterface public void request(String id, String base, String path, String method, String body, String token) {
+            network.execute(() -> {
+                JSONObject result = new JSONObject();
+                HttpURLConnection connection = null;
+                try {
+                    URL endpoint = new URL(base);
+                    String host = endpoint.getHost();
+                    boolean privateHost = host.matches("localhost|127\\.0\\.0\\.1|10\\.(\\d{1,3}\\.){2}\\d{1,3}|192\\.168\\.\\d{1,3}\\.\\d{1,3}|172\\.(1[6-9]|2\\d|3[01])\\.\\d{1,3}\\.\\d{1,3}");
+                    if (!("https".equals(endpoint.getProtocol()) || ("http".equals(endpoint.getProtocol()) && privateHost)) || endpoint.getUserInfo() != null || !path.matches("/api/[a-zA-Z0-9/?=&%._-]+") || !(method.equals("GET") || method.equals("POST") || method.equals("PATCH"))) throw new IOException("Invalid endpoint");
+                    connection = (HttpURLConnection) new URL(base + path).openConnection();
+                    connection.setConnectTimeout(6000); connection.setReadTimeout(6000);
+                    connection.setInstanceFollowRedirects(false); connection.setRequestMethod(method);
+                    if (!token.isEmpty()) connection.setRequestProperty("Authorization", "Bearer " + token);
+                    if (!body.isEmpty()) {
+                        connection.setDoOutput(true); connection.setRequestProperty("Content-Type", "application/json");
+                        byte[] payload = body.getBytes(StandardCharsets.UTF_8);
+                        connection.setFixedLengthStreamingMode(payload.length);
+                        try (java.io.OutputStream output = connection.getOutputStream()) { output.write(payload); }
+                    }
+                    int status = connection.getResponseCode();
+                    InputStream input = status >= 400 ? connection.getErrorStream() : connection.getInputStream();
+                    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                    if (input != null) try (InputStream stream = input) {
+                        byte[] bytes = new byte[4096]; int count;
+                        while ((count = stream.read(bytes)) != -1) { buffer.write(bytes, 0, count); if (buffer.size() > 2_000_000) throw new IOException("Response too large"); }
+                    }
+                    result.put("status", status); result.put("text", new String(buffer.toByteArray(), StandardCharsets.UTF_8));
+                } catch (Exception exception) {
+                    try { result.put("error", "未连接共享服务，请检查服务地址、网络和服务是否启动"); } catch (Exception ignored) {}
+                } finally { if (connection != null) connection.disconnect(); }
+                String script = "window.ShiguangNet && ShiguangNet.complete(" + JSONObject.quote(id) + "," + result.toString() + ")";
+                runOnUiThread(() -> { if (!isFinishing() && !isDestroyed()) web.evaluateJavascript(script, null); });
+            });
+        }
         @JavascriptInterface public synchronized boolean save(String raw) {
             if (raw == null || raw.length() > 2_000_000) return false;
             try {

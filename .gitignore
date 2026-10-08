@@ -6,3 +6,4 @@ __pycache__/
 .gradle/
 evidence/psp_session.json
 source/
+data/

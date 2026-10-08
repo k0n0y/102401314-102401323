@@ -47,7 +47,7 @@ run([tools / 'zipalign.exe', '-f', '4', build / 'base.apk', build / 'aligned.apk
 key = build / 'keys/coursework.keystore'
 if not key.exists():
     run([jdk / 'bin/keytool.exe', '-genkeypair', '-keystore', key, '-storepass', 'coursework', '-keypass', 'coursework', '-alias', 'coursework', '-keyalg', 'RSA', '-keysize', '2048', '-validity', '3650', '-dname', 'CN=Shiguang Coursework, O=FZU, C=CN'])
-apk = root / 'apk/shiguang-1.0.0.apk'
+apk = root / 'apk/shiguang-1.1.0.apk'
 run(['cmd.exe', '/c', tools / 'apksigner.bat', 'sign', '--ks', key, '--ks-pass', 'pass:coursework', '--ks-key-alias', 'coursework', '--out', apk, build / 'aligned.apk'])
 signature = run(['cmd.exe', '/c', tools / 'apksigner.bat', 'verify', '--verbose', '--print-certs', apk])
 run([tools / 'aapt.exe', 'dump', 'badging', apk])
