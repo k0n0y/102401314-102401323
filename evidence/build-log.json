@@ -1,0 +1,42 @@
+[
+  {
+    "tool": "aapt2.exe",
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "tool": "aapt2.exe",
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "tool": "javac.exe",
+    "exitCode": 0,
+    "output": "warning: [options] bootstrap class path not set in conjunction with -source 8\nNote: android\\app\\src\\main\\java\\edu\\fzu\\shiguang\\MainActivity.java uses or overrides a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\n1 warning\n"
+  },
+  {
+    "tool": "cmd.exe",
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "tool": "zipalign.exe",
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "tool": "cmd.exe",
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "tool": "cmd.exe",
+    "exitCode": 0,
+    "output": "Verifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): true\nVerified using v3 scheme (APK Signature Scheme v3): true\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1\nSigner #1 certificate DN: CN=Shiguang Coursework, O=FZU, C=CN\nSigner #1 certificate SHA-256 digest: 1a539700c405a9e1bec7820309e217bfcc94c11eadff4dbe1b17e0047c8a45af\nSigner #1 certificate SHA-1 digest: d744c49f550712f5006536b3cf50fe593534923c\nSigner #1 certificate MD5 digest: ef738198ff50993a3c238a4c3d83412a\nSigner #1 key algorithm: RSA\nSigner #1 key size (bits): 2048\nSigner #1 public key SHA-256 digest: c631b622f376884d00519c0d53f61b51d0e5f4b6b018a57f34e7248c677a10fd\nSigner #1 public key SHA-1 digest: 61407e549622f29abdbcc5027b9b80bc00092684\nSigner #1 public key MD5 digest: 484a5e95b644f84b2b85569a3ee13470\n"
+  },
+  {
+    "tool": "aapt.exe",
+    "exitCode": 0,
+    "output": "package: name='edu.fzu.shiguang' versionCode='1' versionName='1.0.0' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'\nsdkVersion:'26'\ntargetSdkVersion:'35'\napplication-label:'拾光·校园失物招领'\napplication-icon-160:'res/drawable/ic_launcher.xml'\napplication: label='拾光·校园失物招领' icon='res/drawable/ic_launcher.xml'\napplication-debuggable\nlaunchable-activity: name='edu.fzu.shiguang.MainActivity'  label='' icon=''\nfeature-group: label=''\n  uses-feature: name='android.hardware.faketouch'\n  uses-implied-feature: name='android.hardware.faketouch' reason='default feature for all apps'\n  uses-feature: name='android.hardware.screen.portrait'\n  uses-implied-feature: name='android.hardware.screen.portrait' reason='one or more activities have specified a portrait orientation'\nmain\nsupports-screens: 'small' 'normal' 'large' 'xlarge'\nsupports-any-density: 'true'\nlocales: '--_--'\ndensities: '160'\n"
+  }
+]
