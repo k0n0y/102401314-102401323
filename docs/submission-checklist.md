@@ -2,17 +2,19 @@
 
 ## 已在本地完成
 
-- [x] 实际签名 Android APK，包名 edu.fzu.shiguang，版本 1.0.0。
+- [x] 实际签名 Android APK，包名 edu.fzu.shiguang，版本 1.1.0。
 - [x] 发布、浏览、搜索、详情、联系线索与复制、发布者状态更新闭环。
-- [x] 31 个单元测试，按附录采用白盒分支与边界设计。
-- [x] 25 项浏览器 UI 检查、24 项 Android 12 安装版检查，实际日志保留。
+- [x] 55 个业务/API/集成测试，按附录采用白盒分支与边界设计。
+- [x] 24 项独立浏览器检查、21 项 Android 12 APK与独立客户端检查，实际日志保留。
+- [x] 共享服务、SQLite持久数据、独立发布者凭证、跨客户端同步、断网缓存和失败处理。
+- [x] README写明电脑启动服务、手机同一局域网配置、双设备验收；公网配置只作为参考，未宣称已部署。
 - [x] 按学号创建 GitHub 仓库并上传代码和 APK；真实 GitHub 提交页截图已保存。
 - [x] 安装版截图、流程图、数据流图、README、目录说明、使用说明、测试教程。
 - [x] 两人博客技术稿和 PSP 记录模板；未伪造个人实际时间。
 
 ## 必须由成员真实完成
 
-- [ ] 两人分别在本人手机安装 APK 并人工体验，记录机型、安卓版本、问题；模拟器结果不能替代这一步的自述。
+- [ ] 两人分别在本人手机安装1.1.0并连接同一服务人工体验，记录机型、安卓版本、实际网络和问题；模拟器与浏览器不能替代实体手机自述。
 - [ ] 核实实际分工，按真实记录填两人的 PSP 实际耗时与偏差原因。
 - [ ] 补齐两人的博客主页和本次博客文章链接。
 - [ ] 另一名成员用自己的 GitHub 账号 fork 按学号命名的仓库，完成一项真实改进，并提交 Pull Request。不得用同一账号或虚假提交冒充结对。
@@ -29,14 +31,16 @@
 | --- | --- | --- |
 | 1 | images/flowchart.png | 第四节“关键流程图” |
 | 2 | images/dataflow.png | 第四节“数据流图” |
-| 3 | images/android/01-home.png | 第五节成果展示“首页” |
-| 4 | images/android/07-filters.png | 第五节成果展示“组合筛选” |
-| 5 | images/android/03-contact.png | 第五节成果展示“复制联系方式” |
-| 6 | images/android/09-confirm.png | 第五节成果展示“状态确认” |
-| 7 | images/android/10-resolved.png | 第五节成果展示“已归还” |
-| 8 | images/android/05-validation.png | 第五节成果展示“错误提示” |
-| 9 | images/github-commits.png | 第八节代码签入记录 |
+| 3 | images/android-network/03-publish.png | 第五节APK发布界面 |
+| 4 | images/android-network/04-success.png | 第五节共享服务保存成功 |
+| 5 | images/android-network/08-confirm.png | 第五节状态确认 |
+| 6 | images/android-network/09-resolved.png | 第五节APK已归还 |
+| 7 | images/browser-network/05-other-search.png | 第五节独立客户端乙搜索（浏览器截图） |
+| 8 | images/browser-network/10-other-resolved.png | 第五节乙自动同步状态（浏览器截图） |
+| 9 | images/android-network/12-offline-cache.png | 第五节APK断网缓存 |
+| 10 | images/android-network/13-offline-publish.png | 第五节APK断网发布失败 |
+| 11 | images/github-commits.png | 第八节代码签入记录 |
 
-其他安装版截图可用于展示发布成功、重开后状态保留和不同身份权限，不必重复堆砌全部图片。
+其他安装版截图可用于连接设置、联系与强停重开。截图中127.0.0.1:18787是模拟器专用测试转发地址，手机实际使用应填写服务窗口显示的电脑局域网地址；不能将乙浏览器截图称为第二台实体手机。
 
 这是待办清单，不是班级提交成功证据；README 或 ZIP 存在不代表已发博客或已完成 GitHub 结对。

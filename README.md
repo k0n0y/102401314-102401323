@@ -1,75 +1,82 @@
-# 拾光 · 校园失物招领 Android App
+# 拾光 · 校园失物招领 Android App（共享版1.1.0）
 
-基于上一份“拾光”交互原型完成的 Android 应用，成员：曾炜毅（102401314）、陈勇昊（102401323）。
+曾炜毅（102401314）、陈勇昊（102401323）软件工程第二次结对作业。基于上次拾光原型，实现发布、公共浏览、搜索、详情、联系及“已找到/已归还”状态更新。
 
-## 安装与运行（助教无需编译）
+**不同设备连接同一个共享服务，就能共享信息和最新状态。** 正式记录保存在服务端 SQLite，设备仅保存发布者凭证、缓存和草稿。本项目提供可安装 APK 和轻量服务源码，尚未部署公网。
 
-1. 下载本仓库或交付压缩包，找到 **apk/shiguang-1.0.0.apk**。
-2. 传到 Android 8.0 或以上设备，点击 APK，按系统提示允许该来源安装，完成后打开“拾光·校园失物招领”。也可在安卓模拟器拖入 APK 安装。
-3. 初次使用无需登录，不需要服务器、网络、定位或存储权限。系统 Android WebView 建议更新到最新版本。
-4. 首次显示带“示例”标识的虚构样例。点击底部“发布”填写寻物/招领；使用“搜索”按关键词、类型、类别、地点和处理状态筛选。
-5. 点击卡片进入详情，点击“联系发布者”查看或复制联系方式，再在应用外联系。找回或归还后进入“我的”，确认更新状态。
+## 助教运行：启动服务、安装APK、连接同一地址
 
-**这是本设备离线版，不同设备不共享数据。** 在“我的”可以切换甲同学、乙同学、访客，演示同一设备内公共浏览与发布者权限。该切换不构成账号认证。发布者可更新自己的记录，其他身份只读；固定样例不能修改。
+1. 在电脑安装 [Node.js24](https://nodejs.org/en/download)，实测版本24.18.0。下载并解压整个项目，双击根目录 **启动共享服务.cmd**，或在项目目录运行 `npm start`。没有第三方npm依赖，无需npm install。
+2. 保持窗口运行，记下显示的局域网服务地址，例如 `http://192.168.1.5:8787`。电脑浏览器可打开 `http://localhost:8787` 检查页面。
+3. 把 **apk/shiguang-1.1.0.apk** 传到 Android8.0以上手机，允许该来源安装；两台手机与服务电脑加入同一局域网。
+4. 打开 App，在“连接设置”填写第2步地址，点击“连接并同步”。第二台手机填写同一地址。手机不要填写localhost或127.0.0.1，它们指向手机自身。
+5. 初始公共列表为空。甲发布信息，乙搜索查看；甲标记“已找到/已归还”，乙点击刷新或等待约5秒自动同步。只有原发布设备能够更新状态。
 
-卸载或清除应用数据会丢失正式记录。APK 为作业测试签名包，启用 WebView 调试以复现自动检查，没有发布到应用商店。其他人在自己的电脑重新构建会使用新的本地签名；安装到已有相同包名的设备时，签名不同会导致不能覆盖安装。不要为解决覆盖问题直接卸载有重要数据的 App。
+若系统提示Node防火墙访问，允许在专用网络访问。连接失败时，先用手机浏览器打开 `服务地址/api/health`，正常返回ok:true；检查服务是否运行、电脑IP、同一局域网及防火墙。校园Wi-Fi若隔离设备，可让手机和电脑加入同一热点。无需关闭整个防火墙。
 
-## 五分钟验收路径
+APK内置页面和图标，网络调用由原生后台线程执行。HTTP仅用于局域网，公网地址须HTTPS。无需定位、存储、相机或通讯录权限。课程测试签名包启用WebView调试；最低Android8为声明，实际安装检查为Android12模拟器。
 
-1. 首页点击任意样例，检查名称、类型、地点、发生时间、描述、状态和联系方式。
-2. 以默认甲同学身份发布一条招领信息（例：校园卡 / 图书馆一楼 / 过去时间 / 特征描述 / 图书馆服务台）。保存后显示发布成功，并可从搜索进入详情。
-3. 搜索“校园卡”，选择招领、校园卡、图书馆、进行中，检查组合筛选；输入不存在的词检查空结果。
-4. 在“我的发布”把该条信息更新为“已归还”，先取消一次，再确认一次。返回详情核对状态。
-5. 在“我的”切换乙同学：搜索仍能看到甲的已归还信息，详情没有状态按钮，乙的“我的发布”不含甲的记录。
-6. 切回甲同学，发布寻物并更新为“已找到”；完全关闭 App 后重开，检查记录与状态保留。
-7. 用空表单、空格标题、未来时间检查拒绝发布；填写草稿后返回首页，再进发布页检查恢复。
+## 五分钟验收
 
-## 目录说明
+1. 甲发布校园卡招领，填写类别、过去时间、地点、描述、联系方式。服务保存后才显示发布成功。
+2. 乙按关键词、类型、类别、地点、处理状态组合搜索，查看详情并复制联系方式。甲的信息不在乙的“我的发布”，乙没有状态按钮。
+3. 甲先取消一次状态确认，再标记“已归还”；乙查看自动同步后的状态。
+4. 甲发布寻物并标记“已找到”，完全关闭重开App检查身份与记录保留。
+5. 关闭服务，缓存可读，发布/更新失败；重启服务可重试。检查空字段、空格、未来时间、无结果、草稿恢复。
+
+## 身份、持久化与旧版升级
+
+每台安装实例自动获取随机发布者编号和凭证，服务保存凭证SHA-256摘要，用Bearer凭证核验记录归属。已移除旧版甲/乙/访客切换，不允许靠选择身份修改他人数据。这里是简单设备身份，不是实名认证或完整账号体系。
+
+清除手机应用数据会丢失本人的修改凭证，但公共记录仍在服务中；本版没有账号恢复，请保留原发布设备数据。服务有稳定serverId，同服务更换地址后可保留设备身份。备份前先Ctrl+C停止服务，再复制整个data目录；该目录和个人凭证不上传GitHub、不放入ZIP。
+
+同签名1.1.0可以覆盖安装1.0.0。旧离线JSON保留在独立旧存储，不会自动把示例或旧信息上传；真实旧信息应核实后重新发布。旧APK不再是交付入口，历史版本仍在Git及原离线包中。其他电脑重构会生成自己的签名，不能直接覆盖不同签名的安装包。
+
+相同发布请求号重试返回原记录，避免重复发布；并发发布使用独立数据库行，避免整份列表互相覆盖；手机发生时间提交带时区的ISO值。
+
+## 目录
 
 ```text
-apk/                         已签名 APK，助教直接安装
-android/app/src/main/
-  AndroidManifest.xml        App 入口、版本、兼容范围
-  java/edu/fzu/shiguang/      WebView、持久存储、复制、返回键
-  res/drawable/              原生矢量启动图标
-web/
-  index.html                 页面外壳及 SVG 图标
-  styles.css                 原型延续的移动界面和响应式样式
-  domain.js                  校验、发布、筛选、权限、持久化业务逻辑
-  app.js                     页面渲染、路由、表单、确认、草稿
-tests/domain.test.cjs        31 个 Node 单元测试
-scripts/build_apk.py         官方 SDK 编译与 APK 签名验证
-scripts/verify_ui.mjs        浏览器及安卓 WebView 交互验证
-docs/                       需求、博客、PSP、图示、截图、提交清单
-evidence/                   实测构建、单元测试、交互和 APK 哈希记录
-package.json                测试命令，无 npm 运行依赖
+apk/shiguang-1.1.0.apk          可直接安装的共享版APK
+启动共享服务.cmd                Windows一键启动服务
+server/server.cjs              HTTP接口、凭证、SQLite
+web/domain.js                  校验、筛选、旧数据兼容函数
+web/network.js                 请求、服务地址、原生回调
+web/app.js                     页面、连接、同步、缓存、发布和状态
+web/index.html / styles.css    内置移动界面与SVG图标
+android/app/src/main/          原生网络线程、存储、返回键
+tests/domain.test.cjs          31个业务与兼容测试
+tests/server.test.cjs          24个API及集成测试
+scripts/                      构建、测试、材料与交付核验
+docs/                         博客稿、PSP、截图、说明
+evidence/                     实测日志与APK校验
+data/                         运行时数据库（不提交）
 ```
 
-正式信息使用 Android 应用私有 SharedPreferences 保存 JSON；所有状态写入先同步 commit 到磁盘，成功才刷新界面。草稿用 WebView 的本地存储，正式信息损坏时会报错而不是静默重置。
+旧docs/images/android、browser及evidence/android-ui.json、browser-ui.json属于1.0历史记录。**本次共享验证以带network的目录和报告为准。**
 
-## 运行单元测试
+## 测试和源码构建
 
-安装 Node.js 22 或以上，在仓库目录运行以下命令，不需要 npm install：
+安装Node24后，在项目目录运行：
 
 ```powershell
 npm test
 npm run test:coverage
+npm run test:ui
 ```
 
-初学者说明、白盒分支与边界设计见 [单元测试说明](docs/testing.md)。桌面检查共享页面可运行 `npm run test:ui`，需要 Chrome/Edge；这些检查不代替 APK 安装测试。
+UI验证需要Chrome/Edge，采用两套独立浏览器配置。白盒案例与证据见 [docs/testing.md](docs/testing.md)。
 
-## 从源代码构建 APK
-
-需要 Python 3.10+、JDK 17 和官方 Android SDK 平台 35 / Build Tools 35.0.0。构建不依赖第三方 Android 库或 Gradle。SDK 路径内部需能找到 android.jar、aapt2.exe、d8.bat、zipalign.exe、apksigner.bat。
+重新构建APK需要Python3.10+、JDK17、官方Android SDK平台35及Build Tools35.0.0，不依赖Gradle：
 
 ```powershell
 python scripts/build_apk.py --sdk C:\Android\Sdk --jdk C:\Java\jdk-17
 ```
 
-或配置 ANDROID_HOME、JAVA_HOME 后运行 `npm run build:apk`。本机默认工具放在同级 tools/android-build 内，该工具目录不在交付包中；重新构建者需自行安装上述开发工具。编译会自动打包 web 目录，使用本地测试签名，产出同名 APK 并验证 v2/v3 签名。Android 源码使用系统 SDK，未附加未验证的 Android Studio/Gradle 工程。
+或设置ANDROID_HOME、JAVA_HOME运行npm run build:apk。编译打包web资源并验证v2/v3签名；直接安装现成APK无需这些开发工具。
 
-如需核对校验值，查看 [APK 验证](evidence/apk-verification.json)。验证范围与当前测试结果见 [测试说明](docs/testing.md)，交付完成度和仍需本人完成的事项见 [提交清单](docs/submission-checklist.md)。
+## 公网与仍需本人完成的事项
 
-## 技术参考
+作业未明确要求公网托管，局域网共享服务可复现要求的完整流程。若要不同网络长期访问，可在有持久磁盘的服务器运行相同服务，加域名和HTTPS反向代理，再在App填写HTTPS根地址。见 [docs/server-deployment.md](docs/server-deployment.md)。当前没有已上线的公网URL。
 
-采用 [Android 官方 WebView 文档](https://developer.android.com/develop/ui/views/layout/webapps) 中的嵌入自有页面方式，UI 与业务逻辑能复用上一份原型。Node 原生单元测试使用 [node:test](https://nodejs.org/api/test.html)。未调用 AIGC 图片服务，界面图标由内置 SVG 和 Android vector drawable 绘制。
+两人的博客链接、PSP实际耗时、真实分工、另一成员fork/PR、实体手机人工体验和班级提交仍需本人完成，详见 [docs/submission-checklist.md](docs/submission-checklist.md)。

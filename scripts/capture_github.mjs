@@ -22,7 +22,7 @@ try{
   await send('Page.navigate',{url});
   let valid=false;
   for(let i=0;i<80;i++){
-    const result=await send('Runtime.evaluate',{expression:`document.body && document.body.textContent.includes('docs: deliver verified APK')`,returnByValue:true});
+    const result=await send('Runtime.evaluate',{expression:`document.body && document.body.textContent.includes('test: verify cross-client sync')`,returnByValue:true});
     if(result.result?.value){valid=true;break;}await delay(250);
   }
   if(!valid)throw new Error('Public GitHub commits page did not render expected actual commit');
