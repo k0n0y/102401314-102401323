@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const args=['--experimental-test-coverage','--test','tests/domain.test.cjs'];
+const log=execFileSync(process.execPath,args,{cwd:root,encoding:'utf8',windowsHide:true});
+fs.writeFileSync(path.join(root,'evidence/unit-tests.txt'),log);
+const row=log.split(/\r?\n/).find(line=>line.includes('domain.js')&&line.includes('|'));
+const columns=row?.split('|').slice(1,4).map(x=>Number(x.trim()));
+const result={checkedAt:new Date().toISOString(),nodeVersion:process.version,tests:Number(log.match(/tests (\d+)/)?.[1]),passed:Number(log.match(/pass (\d+)/)?.[1]),failed:Number(log.match(/fail (\d+)/)?.[1]),domainCoverage:{lines:columns?.[0],branches:columns?.[1],functions:columns?.[2]}};
+fs.writeFileSync(path.join(root,'evidence/unit-tests.json'),JSON.stringify(result,null,2));
+console.log(JSON.stringify(result,null,2));

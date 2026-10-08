@@ -86,6 +86,7 @@ try {
     await cdp.send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
     await cdp.send('Page.navigate',{url:pathToFileURL(path.join(root,'web/index.html')).href});
   }
+  await nav('#/home');
   await wait(`!!document.querySelector('.hero')`,'home');
   await check(`document.querySelectorAll('.item-card').length>=4`,'首页展示寻物和招领样例');
   if(android)await check(`!!window.AndroidStore && document.body.classList.contains('android')`,'安装 APK 加载原生存储桥和全屏界面');
@@ -93,8 +94,10 @@ try {
   await cdp.eval(`document.querySelector('.item-card').click()`);await delay(200);
   await check(`!!document.querySelector('.detail-body h1')`,'点击卡片能查看详情');
   await shot('02-detail.png');
+  const contactId=await cdp.eval(`document.querySelector('[data-action="contact"]').dataset.id`);
+  const expectedContact=await cdp.eval(`JSON.parse(window.AndroidStore ? AndroidStore.read() : localStorage.getItem('shiguang-app-state-v1')).items.find(item=>item.id===${JSON.stringify(contactId)}).contact`);
   await cdp.eval(`document.querySelector('[data-action="contact"]').click()`);
-  await check(`document.querySelector('.contact-value').textContent.includes('演示联系方式')`,'详情显示发布者提供的联系方式');
+  await check(`document.querySelector('.contact-value').textContent===${JSON.stringify(expectedContact)}`,'详情显示发布者提供的联系方式');
   if(android){await cdp.eval(`document.querySelector('[data-action="copy-contact"]').click()`);await check(`document.querySelector('#toast').textContent==='联系方式已复制'`,'安卓剪贴板复制成功');}
   await shot('03-contact.png');await cdp.eval(`document.querySelector('[data-action="close-dialog"]').click()`);
   await nav('#/publish');await shot('04-publish.png');
