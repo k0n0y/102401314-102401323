@@ -36,7 +36,7 @@ main = root / 'android/app/src/main'
 run([tools / 'aapt2.exe', 'compile', '--dir', main / 'res', '-o', build / 'resources.zip'])
 run([tools / 'aapt2.exe', 'link', '-o', build / 'base.apk', '-I', platform, '--manifest', main / 'AndroidManifest.xml', '-A', root / 'web', '--java', build / 'gen', build / 'resources.zip'])
 sources = list((main / 'java').rglob('*.java')) + list((build / 'gen').rglob('*.java'))
-run([jdk / 'bin/javac.exe', '-encoding', 'UTF-8', '-source', '8', '-target', '8', '-classpath', platform, '-d', build / 'classes', *sources])
+run([jdk / 'bin/javac.exe', '-J-Duser.language=en', '-J-Duser.country=US', '-encoding', 'UTF-8', '-source', '8', '-target', '8', '-classpath', platform, '-d', build / 'classes', *sources])
 with zipfile.ZipFile(build / 'classes.jar', 'w') as z:
     for file in (build / 'classes').rglob('*.class'): z.write(file, file.relative_to(build / 'classes').as_posix())
 # .bat wrappers are invoked through cmd with an argument list, never string-built file operations.

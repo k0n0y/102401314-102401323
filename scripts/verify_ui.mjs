@@ -17,7 +17,7 @@ class Cdp {
     socket.addEventListener('message',({data})=>{
       const value=JSON.parse(data);
       if(value.method==='Runtime.exceptionThrown') report.consoleErrors.push(value.params.exceptionDetails.text);
-      if(value.method==='Log.entryAdded' && value.params.entry.level==='error') report.consoleErrors.push(value.params.entry.text);
+      if(value.method==='Log.entryAdded' && value.params.entry.level==='error') report.consoleErrors.push((value.params.entry.url||'')+' '+value.params.entry.text);
       if(!value.id)return;
       const p=this.pending.get(value.id);if(!p)return;
       clearTimeout(p.timer);this.pending.delete(value.id);

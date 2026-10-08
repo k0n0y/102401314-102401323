@@ -239,6 +239,8 @@
   }
 
   function render({ focus = false } = {}) {
+    clearTimeout(toastTimer);
+    toast.classList.remove('visible');
     const route = parseRoute();
     let html;
     switch (route.page) {

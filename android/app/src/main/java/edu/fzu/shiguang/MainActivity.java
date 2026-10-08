@@ -27,7 +27,7 @@ import java.util.Set;
 /** 单一离线入口：只加载内置资源，不请求网络或设备敏感权限。 */
 public class MainActivity extends Activity {
     private WebView web;
-    private final Set<String> assets = new HashSet<>(Arrays.asList("index.html", "styles.css", "domain.js", "app.js"));
+    private final Set<String> assets = new HashSet<>(Arrays.asList("index.html", "styles.css", "domain.js", "app.js", "favicon.svg"));
     private static final String HOST = "appassets.androidplatform.net";
 
     @Override public void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
                 if (!isLocal(uri)) return errorResponse();
                 String name = uri.getPath().replaceFirst("^/", "");
                 if (!assets.contains(name)) return errorResponse();
-                String mime = name.endsWith(".css") ? "text/css" : name.endsWith(".js") ? "text/javascript" : "text/html";
+                String mime = name.endsWith(".css") ? "text/css" : name.endsWith(".js") ? "text/javascript" : name.endsWith(".svg") ? "image/svg+xml" : "text/html";
                 try { return new WebResourceResponse(mime, "UTF-8", getAssets().open(name)); }
                 catch (IOException exception) { return errorResponse(); }
             }
