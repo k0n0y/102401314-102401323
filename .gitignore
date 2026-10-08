@@ -1,0 +1,8 @@
+build/
+.verify-profile-*/
+*.keystore
+local.properties
+__pycache__/
+.gradle/
+evidence/psp_session.json
+source/
