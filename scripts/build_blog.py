@@ -1,6 +1,8 @@
 from pathlib import Path
 import json, subprocess
 root=Path(__file__).resolve().parents[1]
+team=json.loads((root/'docs/team.json').read_text(encoding='utf-8'))
+blog_homepages={member['name']:member['blogHomepage'] for member in team['members']}
 unit=json.loads((root/'evidence/unit-tests.json').read_text(encoding='utf-8'))
 android=json.loads((root/'evidence/android-network-ui.json').read_text(encoding='utf-8'))
 browser=json.loads((root/'evidence/browser-network-ui.json').read_text(encoding='utf-8'))
@@ -23,8 +25,8 @@ body=f'''# 2026秋软件工程第二次结对作业：拾光校园失物招领�
 | 作业要求 | [第二次结对作业之程序实现](https://edu.cnblogs.com/campus/fzu/2026-01SoftwareEngineeringandSoftwareEngineeringPractice/homework/16745) |
 | 作者 | AUTHOR |
 | 结对成员 | 曾炜毅102401314、陈勇昊102401323 |
-| 本人博客主页 | 【待填真实链接】 |
-| 队友博客主页 | 【待填真实链接】 |
+| 本人博客主页 | AUTHOR_HOMEPAGE |
+| 队友博客主页 | TEAMMATE_HOMEPAGE |
 | 本次作业博客 | 【发布后填写本人及队友文章链接】 |
 | GitHub | [102401314-102401323](https://github.com/k0n0y/102401314-102401323) |
 | APK | [共享版1.1.0](https://github.com/k0n0y/102401314-102401323/raw/refs/heads/main/apk/shiguang-1.1.0.apk) |
@@ -178,5 +180,7 @@ PERSONAL
 '''
 for name,number in [('曾炜毅','102401314'),('陈勇昊','102401323')]:
     personal='【个人总结待本人核实】请结合自己真正参与的设计、代码、测试或复审记录填写，写明实际收获和不足。'
-    (root/f'docs/blog_{name}_待补本人记录.md').write_text(body.replace('AUTHOR',f'{name}（{number}）').replace('PERSONAL',personal),encoding='utf-8')
+    teammate='陈勇昊' if name=='曾炜毅' else '曾炜毅'
+    result=body.replace('AUTHOR_HOMEPAGE',f'[{name}]({blog_homepages[name]})').replace('TEAMMATE_HOMEPAGE',f'[{teammate}]({blog_homepages[teammate]})')
+    (root/f'docs/blog_{name}_待补本人记录.md').write_text(result.replace('AUTHOR',f'{name}（{number}）').replace('PERSONAL',personal),encoding='utf-8')
 print('Generated two verified shared-version blog drafts')

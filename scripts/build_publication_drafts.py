@@ -5,6 +5,8 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 root = Path(__file__).resolve().parents[1]
 docs = root / 'docs'
+team = json.loads((docs/'team.json').read_text(encoding='utf-8'))
+blog_homepages = {member['name']: member['blogHomepage'] for member in team['members']}
 unit = json.loads((root/'evidence/unit-tests.json').read_text(encoding='utf-8'))
 browser = json.loads((root/'evidence/browser-network-ui.json').read_text(encoding='utf-8'))
 android = json.loads((root/'evidence/android-network-ui.json').read_text(encoding='utf-8'))
@@ -321,8 +323,8 @@ for name, number, teammate in [('曾炜毅', '102401314', '陈勇昊'), ('陈勇
 | 作业要求 | [第二次结对作业之程序实现](https://edu.cnblogs.com/campus/fzu/2026-01SoftwareEngineeringandSoftwareEngineeringPractice/homework/16745) |
 | 本文作者 | {name}（{number}） |
 | 结对成员 | 曾炜毅（102401314）、陈勇昊（102401323） |
-| 本人博客主页 | 【待填写：{name}博客主页链接】 |
-| 队友博客主页 | 【待填写：{teammate}博客主页链接】 |
+| 本人博客主页 | [{name}]({blog_homepages[name]}) |
+| 队友博客主页 | [{teammate}]({blog_homepages[teammate]}) |
 | 本次作业博客 | 【待填写：本人及队友本次文章链接】 |
 | 项目仓库 | [102401314-102401323]({repo}) |
 | APK 下载 | [拾光共享版 1.1.0]({repo}/raw/refs/heads/main/apk/shiguang-1.1.0.apk) |
@@ -360,7 +362,7 @@ guide = '''# 两份博客发布前补充与图片对照
 
 ## 先补个人资料
 
-1. 两人的真实博客主页、本次文章发布后的链接。
+1. 两人的博客主页已填入；发表后补充本人和队友本次文章链接。
 2. 实际分工及参与记录。不要直接把建议分工当作已完成贡献。
 3. 两人各自 PSP 实际耗时和偏差说明；预估是编码前实施规划，不能回填成当时未做的个人记录。
 4. 另一成员真实 fork 与有贡献的 PR 链接。
@@ -390,6 +392,6 @@ guide = '''# 两份博客发布前补充与图片对照
 
 各自打开博客园 Markdown 编辑器，粘贴本人稿件并替换图片链接，预览核对图片、代码块、表格和下载链接。个人待填项补齐后再发表。发表后记录两人的文章链接并按课程页面要求提交，填写结对表和GitHub地址。
 
-当前文件是待补个人记录的发布稿，不代表博客已发表或班级提交成功。尚未提供两人的博客链接，本文不猜测主页地址。
+当前文件是待补个人记录的发布稿，不代表博客已发表或班级提交成功。两人的主页已按提供的链接填入，本次文章地址须发表后填写。
 '''
 (docs/'博客园发布前补充与图片对照.md').write_text(guide, encoding='utf-8')

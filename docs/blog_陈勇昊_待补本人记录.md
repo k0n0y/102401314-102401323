@@ -8,8 +8,8 @@
 | 作业要求 | [第二次结对作业之程序实现](https://edu.cnblogs.com/campus/fzu/2026-01SoftwareEngineeringandSoftwareEngineeringPractice/homework/16745) |
 | 作者 | 陈勇昊（102401323） |
 | 结对成员 | 曾炜毅102401314、陈勇昊102401323 |
-| 本人博客主页 | 【待填真实链接】 |
-| 队友博客主页 | 【待填真实链接】 |
+| 本人博客主页 | [陈勇昊](https://www.cnblogs.com/frochen) |
+| 队友博客主页 | [曾炜毅](https://www.cnblogs.com/k0n0y) |
 | 本次作业博客 | 【发布后填写本人及队友文章链接】 |
 | GitHub | [102401314-102401323](https://github.com/k0n0y/102401314-102401323) |
 | APK | [共享版1.1.0](https://github.com/k0n0y/102401314-102401323/raw/refs/heads/main/apk/shiguang-1.1.0.apk) |
@@ -169,6 +169,8 @@ assert.equal(result.status,403);
 [当前提交记录](https://github.com/k0n0y/102401314-102401323/commits/main/)。材料生成时的真实Git记录如下，后续提交以仓库为准：
 
 ```text
+2b464b3 docs: prepare two rubric-aligned blog drafts and image upload guide
+82bfc92 docs: clarify emulator acceptance and verify current shared service
 ef3e2f8 docs: refresh published commit evidence and final shared workflow
 b1cead4 docs: deliver shared APK setup blog drafts and verification evidence
 7b22b2c test: verify cross-client sync authorization offline errors and APK restart
@@ -177,8 +179,6 @@ e24fca7 docs: add real GitHub history capture final APK audit and packaging inst
 e2f6cbb docs: deliver verified APK screenshots test evidence and coursework blog drafts
 65a617a test: verify installed APK clipboard persistence and shared domain edge cases
 e26152c fix: clear stale feedback and serve local app icon in portrait WebView
-4b6c586 feat: implement persistent Android lost-and-found publishing search and owner status flow
-ced7bf6 docs: record assignment scope and PSP estimates before implementation
 ```
 
 ![真实GitHub提交页](images/github-commits.png)
