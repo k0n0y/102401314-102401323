@@ -7,6 +7,7 @@ root = Path(__file__).resolve().parents[1]
 docs = root / 'docs'
 team = json.loads((docs/'team.json').read_text(encoding='utf-8'))
 blog_homepages = {member['name']: member['blogHomepage'] for member in team['members']}
+division = (docs/'分工安排.md').read_text(encoding='utf-8').split('\n', 1)[1].strip()
 unit = json.loads((root/'evidence/unit-tests.json').read_text(encoding='utf-8'))
 browser = json.loads((root/'evidence/browser-network-ui.json').read_text(encoding='utf-8'))
 android = json.loads((root/'evidence/android-network-ui.json').read_text(encoding='utf-8'))
@@ -26,12 +27,7 @@ repo = 'https://github.com/k0n0y/102401314-102401323'
 shared = f'''
 ## 一、结对分工
 
-项目成员为曾炜毅（102401314）和陈勇昊（102401323）。本次程序和材料采用 Codex 辅助开发，个人贡献依据各自实际参与的需求讨论、代码理解与修改、测试、复审和材料整理记录填写。
-
-| 成员 | 实际承担的工作 | 对应记录 |
-| --- | --- | --- |
-| 曾炜毅（102401314） | 【待填写：曾炜毅的真实分工】 | 【待填写：实际 commit、复审或操作记录】 |
-| 陈勇昊（102401323） | 【待填写：陈勇昊的真实分工】 | 【待填写：实际 commit、fork/PR 或操作记录】 |
+{division}
 
 ## 二、PSP 记录
 
@@ -363,12 +359,12 @@ guide = '''# 两份博客发布前补充与图片对照
 ## 先补个人资料
 
 1. 两人的博客主页已填入；发表后补充本人和队友本次文章链接。
-2. 实际分工及参与记录。不要直接把建议分工当作已完成贡献。
+2. 分工安排已拟好并填入两份稿件；核对两人实际参与，补充对应记录。参见分工安排.md。
 3. 两人各自 PSP 实际耗时和偏差说明；预估是编码前实施规划，不能回填成当时未做的个人记录。
 4. 另一成员真实 fork 与有贡献的 PR 链接。
 5. 本人的结对困难、队友一项优点与改进建议、个人总结。
 
-在编辑器搜索“【待填写”，逐项替换；替换后再次检查是否还存在待填标记。技术数据不要改成实体手机或公网已通过。
+在编辑器搜索“【待填写”和“【待核实”，逐项补齐；发布前检查是否仍有待填标记。技术数据不要改成实体手机或公网已通过。
 
 ## 图片上传顺序
 

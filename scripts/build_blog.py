@@ -3,6 +3,7 @@ import json, subprocess
 root=Path(__file__).resolve().parents[1]
 team=json.loads((root/'docs/team.json').read_text(encoding='utf-8'))
 blog_homepages={member['name']:member['blogHomepage'] for member in team['members']}
+division=(root/'docs/分工安排.md').read_text(encoding='utf-8').split('\n',1)[1].strip()
 unit=json.loads((root/'evidence/unit-tests.json').read_text(encoding='utf-8'))
 android=json.loads((root/'evidence/android-network-ui.json').read_text(encoding='utf-8'))
 browser=json.loads((root/'evidence/browser-network-ui.json').read_text(encoding='utf-8'))
@@ -34,7 +35,7 @@ body=f'''# 2026秋软件工程第二次结对作业：拾光校园失物招领�
 
 ## 一、具体分工
 
-【请改为真实分工】建议曾炜毅复核App交互、原生壳及构建；陈勇昊复核接口、白盒测试、使用说明和实际手机体验。建议不能作为已发生贡献；请附本人commit、真实fork/PR及讨论记录。当前没有另一成员贡献的证明。
+{division}
 
 ## 二、PSP记录
 

@@ -17,7 +17,18 @@
 
 ## 一、具体分工
 
-【请改为真实分工】建议曾炜毅复核App交互、原生壳及构建；陈勇昊复核接口、白盒测试、使用说明和实际手机体验。建议不能作为已发生贡献；请附本人commit、真实fork/PR及讨论记录。当前没有另一成员贡献的证明。
+项目成员为曾炜毅（102401314）和陈勇昊（102401323）。程序与技术材料采用 Codex 辅助开发，拟按照“App 交互与安卓交付”和“共享服务与测试复核”划分主要任务。以下是根据现有模块拟定的分工安排，实际参与仍需两位成员核实。
+
+| 成员 | 分工安排 | 对应模块与材料 |
+| --- | --- | --- |
+| 曾炜毅（102401314） | 侧重需求梳理和 App 端：核对发布、搜索、详情、联系、我的发布等页面流程；理解并复审页面交互、草稿及缓存逻辑；负责安卓入口、网络连接和 APK 构建的交付复核，以及主仓库和使用说明整理。 | `web/app.js`、`web/styles.css`、`web/network.js`、`android/`、`scripts/build_apk.py`、`README.md` |
+| 陈勇昊（102401323） | 侧重共享服务与质量验证：理解并复审接口、SQLite 存储和发布者权限；按白盒分支和边界值设计、补充测试；核对跨客户端同步、断网与重启行为；整理测试报告、成果截图和博客技术材料。 | `server/server.cjs`、`web/domain.js`、`tests/`、`docs/testing.md`、`docs/images/`、博客稿 |
+
+双方共同负责需求确认、接口与状态约定、App 和服务联调、关键代码复审及总结。曾炜毅侧重从使用者流程检查测试是否覆盖实际操作，陈勇昊侧重从异常和权限条件检查 App 行为是否正确；发现问题后共同复核修改结果。
+
+协作安排：曾炜毅维护主仓库，陈勇昊通过本人账号 fork 仓库，在实际修改或补充测试后提交 Pull Request。两人分别记录自己的 PSP 实际耗时，填写个人总结和对队友的评价，并各自发布、提交作业博客。此安排不表示另一成员已经完成 fork、PR 或个人验收。
+
+【待核实：两位成员实际承担的任务及相应 commit、PR、复审或操作记录。】
 
 ## 二、PSP记录
 
@@ -169,6 +180,7 @@ assert.equal(result.status,403);
 [当前提交记录](https://github.com/k0n0y/102401314-102401323/commits/main/)。材料生成时的真实Git记录如下，后续提交以仓库为准：
 
 ```text
+0030e7b docs: fill confirmed teammate blog homepages in both drafts
 2b464b3 docs: prepare two rubric-aligned blog drafts and image upload guide
 82bfc92 docs: clarify emulator acceptance and verify current shared service
 ef3e2f8 docs: refresh published commit evidence and final shared workflow
@@ -178,7 +190,6 @@ b1cead4 docs: deliver shared APK setup blog drafts and verification evidence
 e24fca7 docs: add real GitHub history capture final APK audit and packaging instructions
 e2f6cbb docs: deliver verified APK screenshots test evidence and coursework blog drafts
 65a617a test: verify installed APK clipboard persistence and shared domain edge cases
-e26152c fix: clear stale feedback and serve local app icon in portrait WebView
 ```
 
 ![真实GitHub提交页](images/github-commits.png)
