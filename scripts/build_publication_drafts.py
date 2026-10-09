@@ -8,6 +8,7 @@ docs = root / 'docs'
 team = json.loads((docs/'team.json').read_text(encoding='utf-8'))
 blog_homepages = {member['name']: member['blogHomepage'] for member in team['members']}
 division = (docs/'分工安排.md').read_text(encoding='utf-8').split('\n', 1)[1].strip()
+time_reference = (docs/'PSP耗时参考草稿.md').read_text(encoding='utf-8').split('\n', 1)[1].strip()
 unit = json.loads((root/'evidence/unit-tests.json').read_text(encoding='utf-8'))
 browser = json.loads((root/'evidence/browser-network-ui.json').read_text(encoding='utf-8'))
 android = json.loads((root/'evidence/android-network-ui.json').read_text(encoding='utf-8'))
@@ -38,6 +39,8 @@ shared = f'''
 复审共享需求后，编码前另记录了补充阶段规划：需求复审 15 分钟，接口与身份设计 20 分钟，实现 80 分钟，服务与独立客户端验证 35 分钟，APK 构建和安装验证 20 分钟，材料修订 25 分钟，合计 195 分钟。这部分与初始规划分开记录，原始记录见仓库 `docs/PSP.md`。
 
 【待填写：本人和队友实际耗时；根据真实记录说明哪个环节出现偏差、原因及下次的改进。】
+
+{time_reference}
 
 ## 三、解题思路与设计实现
 
@@ -360,7 +363,7 @@ guide = '''# 两份博客发布前补充与图片对照
 
 1. 两人的博客主页已填入；发表后补充本人和队友本次文章链接。
 2. 分工安排已拟好并填入两份稿件；核对两人实际参与，补充对应记录。参见分工安排.md。
-3. 两人各自 PSP 实际耗时和偏差说明；预估是编码前实施规划，不能回填成当时未做的个人记录。
+3. 两人的耗时参考分配已补入正文：曾炜毅 1010 分钟、陈勇昊 1050 分钟。参见 PSP耗时参考草稿.md，逐项核对本人实际投入后再更新实际栏和偏差说明；事后参考不能冒充计时记录或编码前个人预估。
 4. 另一成员真实 fork 与有贡献的 PR 链接。
 5. 本人的结对困难、队友一项优点与改进建议、个人总结。
 

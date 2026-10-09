@@ -4,6 +4,7 @@ root=Path(__file__).resolve().parents[1]
 team=json.loads((root/'docs/team.json').read_text(encoding='utf-8'))
 blog_homepages={member['name']:member['blogHomepage'] for member in team['members']}
 division=(root/'docs/分工安排.md').read_text(encoding='utf-8').split('\n',1)[1].strip()
+time_reference=(root/'docs/PSP耗时参考草稿.md').read_text(encoding='utf-8').split('\n',1)[1].strip()
 unit=json.loads((root/'evidence/unit-tests.json').read_text(encoding='utf-8'))
 android=json.loads((root/'evidence/android-network-ui.json').read_text(encoding='utf-8'))
 browser=json.loads((root/'evidence/browser-network-ui.json').read_text(encoding='utf-8'))
@@ -44,6 +45,8 @@ body=f'''# 2026秋软件工程第二次结对作业：拾光校园失物招领�
 {table}
 
 【待填实际耗时及偏差分析：哪些环节超过预估，原因是什么，下次如何安排。】完整补充规划在docs/PSP.md，不能把助手执行耗时写成本人工作时长。
+
+{time_reference}
 
 ## 三、解题思路与模块设计
 
