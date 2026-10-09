@@ -3,6 +3,7 @@ import json, subprocess
 root=Path(__file__).resolve().parents[1]
 team=json.loads((root/'docs/team.json').read_text(encoding='utf-8'))
 blog_homepages={member['name']:member['blogHomepage'] for member in team['members']}
+partner_fork=team['collaboration']['partnerFork']
 division=(root/'docs/分工安排.md').read_text(encoding='utf-8').split('\n',1)[1].strip()
 time_reference=(root/'docs/PSP耗时参考草稿.md').read_text(encoding='utf-8').split('\n',1)[1].strip()
 unit=json.loads((root/'evidence/unit-tests.json').read_text(encoding='utf-8'))
@@ -163,7 +164,7 @@ assert.equal(result.status,403);
 
 ![真实GitHub提交页](images/github-commits.png)
 
-【待填另一成员真实fork与PR链接】。另一人用自己的账号fork，做真实改进后提交PR。不能用同一账号空提交冒充结对。两人需分别发布博客并完成班级表登记。
+队友的公开 fork 已核对：[Cgg0024/102401314-102401323]({partner_fork})，来源为作业主仓库。核对时 main 分支与主仓库一致，新增贡献和 PR 仍待完成。【待填写：真实 PR 链接】。队友应在自己的账号做实际改进并提交 PR。两人需分别发布博客并完成班级表登记。
 
 ## 九、实际问题、尝试与解决
 

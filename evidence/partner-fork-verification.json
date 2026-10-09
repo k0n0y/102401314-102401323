@@ -1,0 +1,20 @@
+{
+  "verifiedAt": "2026-10-09T08:07:49Z",
+  "repository": "https://github.com/Cgg0024/102401314-102401323",
+  "owner": "Cgg0024",
+  "isFork": true,
+  "parent": "k0n0y/102401314-102401323",
+  "source": "k0n0y/102401314-102401323",
+  "defaultBranch": "main",
+  "forkVerified": true,
+  "comparisonAtVerification": {
+    "base": "k0n0y:main",
+    "head": "Cgg0024:main",
+    "status": "identical",
+    "sha": "b4938eb3e6c8d1f49130a55bb4f1abc3eb68eb96",
+    "aheadBy": 0,
+    "behindBy": 0
+  },
+  "partnerPullRequests": [],
+  "partnerPullRequestVerified": false
+}

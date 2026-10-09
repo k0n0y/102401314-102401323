@@ -26,7 +26,7 @@
 
 双方共同负责需求确认、接口与状态约定、App 和服务联调、关键代码复审及总结。曾炜毅侧重从使用者流程检查测试是否覆盖实际操作，陈勇昊侧重从异常和权限条件检查 App 行为是否正确；发现问题后共同复核修改结果。
 
-协作安排：曾炜毅维护主仓库，陈勇昊通过本人账号 fork 仓库，在实际修改或补充测试后提交 Pull Request。两人分别记录自己的 PSP 实际耗时，填写个人总结和对队友的评价，并各自发布、提交作业博客。此安排不表示另一成员已经完成 fork、PR 或个人验收。
+协作安排：曾炜毅维护主仓库，陈勇昊使用 Cgg0024 账号创建的 [作业 fork](https://github.com/Cgg0024/102401314-102401323) 已核对来源。在实际修改或补充测试后，由队友提交 Pull Request。两人分别记录自己的 PSP 实际耗时，填写个人总结和对队友的评价，并各自发布、提交作业博客。PR、具体贡献和个人验收仍待完成或核实。
 
 【待核实：两位成员实际承担的任务及相应 commit、PR、复审或操作记录。】
 
@@ -236,6 +236,7 @@ assert.equal(result.status,403);
 [当前提交记录](https://github.com/k0n0y/102401314-102401323/commits/main/)。材料生成时的真实Git记录如下，后续提交以仓库为准：
 
 ```text
+b4938eb docs: add clearly labeled personal PSP reference allocations
 e4f64b2 docs: draft module-based pairing responsibilities for both blog posts
 0030e7b docs: fill confirmed teammate blog homepages in both drafts
 2b464b3 docs: prepare two rubric-aligned blog drafts and image upload guide
@@ -245,12 +246,11 @@ b1cead4 docs: deliver shared APK setup blog drafts and verification evidence
 7b22b2c test: verify cross-client sync authorization offline errors and APK restart
 3478c6d feat: add shared SQLite service and device-authorized Android sync
 e24fca7 docs: add real GitHub history capture final APK audit and packaging instructions
-e2f6cbb docs: deliver verified APK screenshots test evidence and coursework blog drafts
 ```
 
 ![真实GitHub提交页](images/github-commits.png)
 
-【待填另一成员真实fork与PR链接】。另一人用自己的账号fork，做真实改进后提交PR。不能用同一账号空提交冒充结对。两人需分别发布博客并完成班级表登记。
+队友的公开 fork 已核对：[Cgg0024/102401314-102401323](https://github.com/Cgg0024/102401314-102401323)，来源为作业主仓库。核对时 main 分支与主仓库一致，新增贡献和 PR 仍待完成。【待填写：真实 PR 链接】。队友应在自己的账号做实际改进并提交 PR。两人需分别发布博客并完成班级表登记。
 
 ## 九、实际问题、尝试与解决
 

@@ -10,5 +10,11 @@
       "studentId": "102401323",
       "blogHomepage": "https://www.cnblogs.com/frochen"
     }
-  ]
+  ],
+  "collaboration": {
+    "mainRepository": "https://github.com/k0n0y/102401314-102401323",
+    "partnerGitHubAccount": "Cgg0024",
+    "partnerFork": "https://github.com/Cgg0024/102401314-102401323",
+    "partnerPullRequest": null
+  }
 }
