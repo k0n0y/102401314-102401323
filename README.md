@@ -79,6 +79,8 @@ python scripts/build_apk.py --sdk C:\Android\Sdk --jdk C:\Java\jdk-17
 
 博客正文已另整理为 [曾炜毅发布稿](docs/博客园发布稿_曾炜毅.md)、[陈勇昊发布稿](docs/博客园发布稿_陈勇昊.md)，图片上传及个人待填项见 [发布前补充与图片对照](docs/博客园发布前补充与图片对照.md)。这些是尚待本人记录补齐的稿件，未代表博客已发表。
 
+最新 [作业要求自查](docs/作业自查_2026-10-10.md) 列出程序证据、博客评分项和提交缺口；整体作业仍需补齐个人记录、图片链接、博客发表及课程提交。
+
 作业未明确要求公网托管，局域网共享服务可复现要求的完整流程。若要不同网络长期访问，可在有持久磁盘的服务器运行相同服务，加域名和HTTPS反向代理，再在App填写HTTPS根地址。见 [docs/server-deployment.md](docs/server-deployment.md)。当前没有已上线的公网URL。
 
 队友的 [fork](https://github.com/Cgg0024/102401314-102401323) 和 [PR #1](https://github.com/k0n0y/102401314-102401323/pull/1) 已核对，PR 已合并至 main，贡献与复审记录见 [结对协作记录](docs/结对协作记录.md)。两人的本次博客文章链接、PSP实际耗时、其他实际分工、App本人操作验收和班级提交仍需补齐，详见 [docs/submission-checklist.md](docs/submission-checklist.md)。App本人操作验收可以使用安卓模拟器，截图中的作业要求没有强制实体手机；请如实注明测试环境。

@@ -1,6 +1,7 @@
 {
-  "capturedAt": "2026-10-08T04:06:20.148Z",
+  "capturedAt": "2026-10-10T06:24:55.505Z",
   "url": "https://github.com/k0n0y/102401314-102401323/commits/main/",
+  "expectedCommit": "Merge pull request #1 from Cgg0024/docs-add-run-result",
   "expectedCommitVisible": true,
   "method": "headless Chrome screenshot of real public GitHub page"
 }

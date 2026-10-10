@@ -1,6 +1,6 @@
 {
   "mode": "Chromium shared UI",
-  "startedAt": "2026-10-08T04:01:40.294Z",
+  "startedAt": "2026-10-10T06:21:11.498Z",
   "checks": [
     "空表单仍能阻止发布",
     "联网版保留草稿",
@@ -30,16 +30,17 @@
   "consoleErrors": [],
   "expectedNetworkErrors": [
     "http://127.0.0.1:18787/api/items Failed to load resource: net::ERR_CONNECTION_REFUSED",
-    "http://127.0.0.1:18787/api/items/c1d7a1cd-2418-44cf-a450-481415b95c23/status Failed to load resource: net::ERR_CONNECTION_REFUSED",
+    "http://127.0.0.1:18787/api/items/b90b9d0c-ae25-47db-996f-13b888e5c5eb/status Failed to load resource: net::ERR_CONNECTION_REFUSED",
+    "http://127.0.0.1:18787/api/items Failed to load resource: net::ERR_CONNECTION_REFUSED",
     "http://127.0.0.1:18787/api/items Failed to load resource: net::ERR_CONNECTION_REFUSED"
   ],
   "passed": true,
-  "finishedAt": "2026-10-08T04:01:53.436Z",
-  "clientA": "a55bf578-1bfd-4a51-8ee0-b38b39af879d",
-  "clientB": "afbd2ef6-9f98-4f60-8a00-04d316c37afc",
+  "finishedAt": "2026-10-10T06:21:25.561Z",
+  "clientA": "50d2a43d-cd66-4819-a9dd-2dea36457560",
+  "clientB": "69234e9b-6d34-4ff1-b77e-a4131e0823db",
   "items": [
-    "c1d7a1cd-2418-44cf-a450-481415b95c23",
-    "c4f10bf2-f223-45f5-b137-62f4c2432533"
+    "b90b9d0c-ae25-47db-996f-13b888e5c5eb",
+    "3386064c-8dc1-4b46-8665-98896846e9e9"
   ],
   "screenshots": [
     "02-home.png",

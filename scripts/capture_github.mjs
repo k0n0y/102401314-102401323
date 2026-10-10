@@ -19,17 +19,18 @@ try{
   await send('Page.enable');await send('Runtime.enable');
   await send('Emulation.setDeviceMetricsOverride',{width:1440,height:1100,deviceScaleFactor:1,mobile:false});
   const url='https://github.com/k0n0y/102401314-102401323/commits/main/';
+  const expectedCommit='Merge pull request #1 from Cgg0024/docs-add-run-result';
   await send('Page.navigate',{url});
   let valid=false;
   for(let i=0;i<80;i++){
-    const result=await send('Runtime.evaluate',{expression:`document.body && document.body.textContent.includes('test: verify cross-client sync')`,returnByValue:true});
+    const result=await send('Runtime.evaluate',{expression:`document.body && document.body.textContent.includes(${JSON.stringify(expectedCommit)})`,returnByValue:true});
     if(result.result?.value){valid=true;break;}await delay(250);
   }
   if(!valid)throw new Error('Public GitHub commits page did not render expected actual commit');
   await delay(1500);
   const screenshot=await send('Page.captureScreenshot',{format:'png',fromSurface:true});
   fs.writeFileSync(path.join(root,'docs/images/github-commits.png'),Buffer.from(screenshot.data,'base64'));
-  fs.writeFileSync(path.join(root,'evidence/github-screenshot.json'),JSON.stringify({capturedAt:new Date().toISOString(),url,expectedCommitVisible:true,method:'headless Chrome screenshot of real public GitHub page'},null,2));
+  fs.writeFileSync(path.join(root,'evidence/github-screenshot.json'),JSON.stringify({capturedAt:new Date().toISOString(),url,expectedCommit,expectedCommitVisible:true,method:'headless Chrome screenshot of real public GitHub page'},null,2));
   console.log('Captured actual GitHub commits page');
 }catch(error){console.error(error.message);process.exitCode=1;}
 finally{

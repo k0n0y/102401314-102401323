@@ -1,0 +1,86 @@
+{
+  "checkedAt": "2026-10-10T06:24:25.229891+00:00",
+  "clientDate": "2026-10-10",
+  "basis": "Six user-provided assignment screenshots; protected course page still redirects to sign-in",
+  "sourceCommitAtCheck": "a743e377d7c9b602dd5104d0661dafd5bb461f88",
+  "overallAssignmentComplete": false,
+  "programCoreRequirementsEvidenced": true,
+  "unitTestsRerun": {
+    "checkedAt": "2026-10-10T06:21:12.516Z",
+    "nodeVersion": "v24.18.0",
+    "tests": 55,
+    "passed": 55,
+    "failed": 0,
+    "domainCoverage": {
+      "lines": 98.86,
+      "branches": 92.39,
+      "functions": 100
+    }
+  },
+  "browserChecksRerun": {
+    "passed": true,
+    "count": 24,
+    "finishedAt": "2026-10-10T06:21:25.561Z"
+  },
+  "androidPriorEvidence": {
+    "passed": true,
+    "count": 21,
+    "finishedAt": "2026-10-08T03:56:57.273Z",
+    "rerunThisAudit": false
+  },
+  "apkSha256": "35f9108283de4ee921868e3816af7a2441e4d365e3832a69fdac5a9387d475dd",
+  "deliveryChecksPassed": true,
+  "deliveryCheckCount": 101,
+  "partnerForkVerified": true,
+  "partnerPullRequestMerged": true,
+  "partnerPullRequest": "https://github.com/k0n0y/102401314-102401323/pull/1",
+  "blogs": [
+    {
+      "author": "曾炜毅",
+      "file": "docs\\博客园发布稿_曾炜毅.md",
+      "sectionCount": 10,
+      "localImageCount": 11,
+      "pendingFields": [
+        "【待填写：本人及队友本次文章链接】",
+        "【待核实：两位成员实际承担的任务及相应 commit、PR、复审或操作记录。】",
+        "【待填写：本人和队友实际耗时；根据真实记录说明哪个环节出现偏差、原因及下次的改进。】",
+        "【待核实：两位成员逐项确认参考值，填入实际投入或注明本人确认的回顾估计，并补充真实的偏差原因。】",
+        "【待填写：两人实际遇到的一项协作困难、各自尝试、是否解决，以及从这次讨论中获得的改进。】",
+        "【待填写：曾炜毅对陈勇昊值得学习之处的真实评价，附一个具体事例。】",
+        "【待填写：曾炜毅对陈勇昊需要改进之处的建议，说明下一次合作可以怎样调整。】",
+        "【待填写：曾炜毅实际参与的工作、学习或复审过程，以及本人最明确的收获和不足。】"
+      ],
+      "publishedArticleVerified": false
+    },
+    {
+      "author": "陈勇昊",
+      "file": "docs\\博客园发布稿_陈勇昊.md",
+      "sectionCount": 10,
+      "localImageCount": 11,
+      "pendingFields": [
+        "【待填写：本人及队友本次文章链接】",
+        "【待核实：两位成员实际承担的任务及相应 commit、PR、复审或操作记录。】",
+        "【待填写：本人和队友实际耗时；根据真实记录说明哪个环节出现偏差、原因及下次的改进。】",
+        "【待核实：两位成员逐项确认参考值，填入实际投入或注明本人确认的回顾估计，并补充真实的偏差原因。】",
+        "【待填写：两人实际遇到的一项协作困难、各自尝试、是否解决，以及从这次讨论中获得的改进。】",
+        "【待填写：陈勇昊对曾炜毅值得学习之处的真实评价，附一个具体事例。】",
+        "【待填写：陈勇昊对曾炜毅需要改进之处的建议，说明下一次合作可以怎样调整。】",
+        "【待填写：陈勇昊实际参与的工作、学习或复审过程，以及本人最明确的收获和不足。】"
+      ],
+      "publishedArticleVerified": false
+    }
+  ],
+  "actualPersonalPspVerified": false,
+  "studentAppManualAcceptanceVerified": false,
+  "classSubmissionVerified": false,
+  "pairingFormVerified": false,
+  "remaining": [
+    "Confirm actual participation and personal PSP times",
+    "Fill personal summary, teammate evaluation and collaboration difficulty",
+    "Replace local image paths with uploaded image URLs",
+    "Publish both articles and add reciprocal article links",
+    "Submit each article to the course and complete the class pairing form"
+  ],
+  "githubCommitScreenshotUpdated": true,
+  "githubScreenshotCapturedAt": "2026-10-10T06:24:55.505Z"
+}

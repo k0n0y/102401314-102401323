@@ -236,6 +236,7 @@ assert.equal(result.status,403);
 [当前提交记录](https://github.com/k0n0y/102401314-102401323/commits/main/)。材料生成时的真实Git记录如下，后续提交以仓库为准：
 
 ```text
+a743e37 docs: synchronize merged partner PR across delivery materials
 3f85f54 Merge pull request #1 from Cgg0024/docs-add-run-result
 146ee2e docs: record maintainer correction of partner PR environment
 b667b8d docs: correct Windows product name for build 26200
@@ -245,7 +246,6 @@ e2f0ac2 docs: add verified run results
 b4938eb docs: add clearly labeled personal PSP reference allocations
 e4f64b2 docs: draft module-based pairing responsibilities for both blog posts
 0030e7b docs: fill confirmed teammate blog homepages in both drafts
-2b464b3 docs: prepare two rubric-aligned blog drafts and image upload guide
 ```
 
 ![真实GitHub提交页](images/github-commits.png)
