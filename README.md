@@ -81,7 +81,7 @@ python scripts/build_apk.py --sdk C:\Android\Sdk --jdk C:\Java\jdk-17
 
 作业未明确要求公网托管，局域网共享服务可复现要求的完整流程。若要不同网络长期访问，可在有持久磁盘的服务器运行相同服务，加域名和HTTPS反向代理，再在App填写HTTPS根地址。见 [docs/server-deployment.md](docs/server-deployment.md)。当前没有已上线的公网URL。
 
-两人的博客链接、PSP实际耗时、真实分工、另一成员fork/PR、本人操作验收和班级提交仍需完成，详见 [docs/submission-checklist.md](docs/submission-checklist.md)。本人操作验收可以使用安卓模拟器，截图中的作业要求没有强制实体手机；请如实注明测试环境。
+队友的 [fork](https://github.com/Cgg0024/102401314-102401323) 和 [PR #1](https://github.com/k0n0y/102401314-102401323/pull/1) 已核对，PR 已合并至 main，贡献与复审记录见 [结对协作记录](docs/结对协作记录.md)。两人的本次博客文章链接、PSP实际耗时、其他实际分工、App本人操作验收和班级提交仍需补齐，详见 [docs/submission-checklist.md](docs/submission-checklist.md)。App本人操作验收可以使用安卓模拟器，截图中的作业要求没有强制实体手机；请如实注明测试环境。
 
 ## 本次本地实测运行记录
 

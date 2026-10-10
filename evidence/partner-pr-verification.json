@@ -1,12 +1,12 @@
 {
-  "verifiedAt": "2026-10-10T06:14:26Z",
+  "verifiedAt": "2026-10-10 06:18:31 UTC",
   "url": "https://github.com/k0n0y/102401314-102401323/pull/1",
   "number": 1,
   "title": "docs: add verified run results",
   "author": "Cgg0024",
-  "state": "open",
-  "merged": false,
-  "mergedAt": null,
+  "state": "closed",
+  "merged": true,
+  "mergedAt": "2026-10-10T06:17:28Z",
   "baseRepository": "k0n0y/102401314-102401323",
   "baseRef": "main",
   "headRepository": "Cgg0024/102401314-102401323",
@@ -58,5 +58,7 @@
   "classSubmissionVerified": false,
   "initialVerifiedAt": "2026-10-10 06:06:31 UTC",
   "initialHeadSha": "e2f0ac20a5dc0e33b7a2b87e5b95d8b142137478",
-  "correctedReadmeVerified": true
+  "correctedReadmeVerified": true,
+  "mergeCommitSha": "3f85f54a5375424784862e3ed3e15e1b1f161cbb",
+  "mergedBy": "k0n0y"
 }
