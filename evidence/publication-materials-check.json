@@ -1,0 +1,128 @@
+{
+  "checkedAtUtc": "2026-10-10T06:34:47.819887+00:00",
+  "passed": true,
+  "scope": "正文结构、非空个人草稿及公开图片字节核验",
+  "articles": [
+    {
+      "author": "曾炜毅",
+      "file": "D:\\软件工程\\102401314-102401323\\docs\\博客园直接粘贴版_曾炜毅.md",
+      "mainSections": 10,
+      "images": 11,
+      "emptyPersonalParagraphs": 0,
+      "personalExpressionDrafted": true,
+      "personalExpressionConfirmed": false,
+      "actualPersonalPspConfirmed": false,
+      "publishedArticleVerified": false
+    },
+    {
+      "author": "陈勇昊",
+      "file": "D:\\软件工程\\102401314-102401323\\docs\\博客园直接粘贴版_陈勇昊.md",
+      "mainSections": 10,
+      "images": 11,
+      "emptyPersonalParagraphs": 0,
+      "personalExpressionDrafted": true,
+      "personalExpressionConfirmed": false,
+      "actualPersonalPspConfirmed": false,
+      "publishedArticleVerified": false
+    }
+  ],
+  "publicImageLinks": [
+    {
+      "url": "https://raw.githubusercontent.com/k0n0y/102401314-102401323/70a9203136043737e1056a8509965bb13b9580a8/docs/images/flowchart.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 252147,
+      "sha256": "a513a7567926387ea790b4d5f2c366dfe629040df97f27c1930bbc2df665c5ef",
+      "localBytesMatched": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/k0n0y/102401314-102401323/70a9203136043737e1056a8509965bb13b9580a8/docs/images/dataflow.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 210283,
+      "sha256": "dea47b9f63fc5a6d12bd32bcd62870f9ea978fd308f9e09979923af0cddfad66",
+      "localBytesMatched": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/k0n0y/102401314-102401323/70a9203136043737e1056a8509965bb13b9580a8/docs/images/browser-network/05-other-search.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 39363,
+      "sha256": "f6b88d5ff15f184f2d3c32863001addd952c8c5e446708dfbfcdd004784124cf",
+      "localBytesMatched": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/k0n0y/102401314-102401323/70a9203136043737e1056a8509965bb13b9580a8/docs/images/browser-network/06-other-contact.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 35325,
+      "sha256": "399e2590b966b945e0288ceede7cb480b9c4cf63cd100f728e7e5c228c375eac",
+      "localBytesMatched": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/k0n0y/102401314-102401323/70a9203136043737e1056a8509965bb13b9580a8/docs/images/android-network/13-offline-publish.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 168399,
+      "sha256": "b659ae29bb974be9e090a5f0144f8dc942436759ac820d0ddbd3033beaa0b8f5",
+      "localBytesMatched": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/k0n0y/102401314-102401323/70a9203136043737e1056a8509965bb13b9580a8/docs/images/android-network/08-confirm.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 114388,
+      "sha256": "ad76d86a7dafeda8bb0dd13af5b280054ec925d68f762bba1a780cb7a010998d",
+      "localBytesMatched": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/k0n0y/102401314-102401323/70a9203136043737e1056a8509965bb13b9580a8/docs/images/android-network/09-resolved.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 108651,
+      "sha256": "be6d7698e396e304cc02f0b4166fc50da7816341e76604603ad05cc5d8495b99",
+      "localBytesMatched": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/k0n0y/102401314-102401323/70a9203136043737e1056a8509965bb13b9580a8/docs/images/browser-network/10-other-resolved.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 37146,
+      "sha256": "177b13df941d09e801fd9e7af9fb754d4dfaba2ddac8299f4ce3bc81937c25eb",
+      "localBytesMatched": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/k0n0y/102401314-102401323/70a9203136043737e1056a8509965bb13b9580a8/docs/images/android-network/03-publish.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 143385,
+      "sha256": "900990e630ca1e06735474c99007be1b07e908b7bc78ab8aa463046dd83c959b",
+      "localBytesMatched": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/k0n0y/102401314-102401323/70a9203136043737e1056a8509965bb13b9580a8/docs/images/android-network/04-success.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 99859,
+      "sha256": "f2b5fcf3d3b0684a50740fde17e99f1e8f5887db2a02c8196e4358fd30309db3",
+      "localBytesMatched": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/k0n0y/102401314-102401323/70a9203136043737e1056a8509965bb13b9580a8/docs/images/github-commits.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 125607,
+      "sha256": "1e24419d3a5af50f72256a1688bf3642f08c8e928c94be81ce2126c82efce1cd",
+      "localBytesMatched": true
+    }
+  ],
+  "uniquePublicImages": 11,
+  "cnblogsPreviewVerified": false,
+  "classSubmissionVerified": false,
+  "fullAssignmentComplete": false,
+  "remaining": [
+    "成员确认个人表达和实际投入",
+    "博客园预览与发表并取得文章链接",
+    "课程提交成功及班级结对表填写"
+  ]
+}
