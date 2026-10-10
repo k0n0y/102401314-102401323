@@ -1,5 +1,5 @@
 {
-  "verifiedAt": "2026-10-10 06:06:31 UTC",
+  "verifiedAt": "2026-10-10T06:14:26Z",
   "url": "https://github.com/k0n0y/102401314-102401323/pull/1",
   "number": 1,
   "title": "docs: add verified run results",
@@ -11,7 +11,7 @@
   "baseRef": "main",
   "headRepository": "Cgg0024/102401314-102401323",
   "headRef": "docs-add-run-result",
-  "headSha": "e2f0ac20a5dc0e33b7a2b87e5b95d8b142137478",
+  "headSha": "b667b8dfb7fd49ad81c8754407fc8cdb28813787",
   "files": [
     {
       "filename": "README.md",
@@ -26,6 +26,12 @@
       "message": "docs: add verified run results",
       "author": "Cgg0024",
       "url": "https://github.com/k0n0y/102401314-102401323/commit/e2f0ac20a5dc0e33b7a2b87e5b95d8b142137478"
+    },
+    {
+      "sha": "b667b8dfb7fd49ad81c8754407fc8cdb28813787",
+      "message": "docs: correct Windows product name for build 26200",
+      "author": "k0n0y",
+      "url": "https://github.com/k0n0y/102401314-102401323/commit/b667b8dfb7fd49ad81c8754407fc8cdb28813787"
     }
   ],
   "verifiedContribution": "README run-environment, test-command/output and service-health documentation",
@@ -41,9 +47,16 @@
       "file": "README.md",
       "issue": "Windows 10 Home China 25H2 (build 26200) product-name and version/build do not match",
       "reference": "https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information",
-      "suggestion": "Confirm using winver on the tested machine and correct the product name."
+      "suggestion": "Confirm using winver on the tested machine and correct the product name.",
+      "resolved": true,
+      "correctionCommit": "b667b8dfb7fd49ad81c8754407fc8cdb28813787",
+      "resolvedBy": "k0n0y (upstream maintainer)",
+      "resolution": "README now says Windows 11 25H2 (build 26200), explicitly identifying the product-name correction based on version/build; no new machine inspection was claimed."
     }
   ],
   "appManualAcceptanceVerified": false,
-  "classSubmissionVerified": false
+  "classSubmissionVerified": false,
+  "initialVerifiedAt": "2026-10-10 06:06:31 UTC",
+  "initialHeadSha": "e2f0ac20a5dc0e33b7a2b87e5b95d8b142137478",
+  "correctedReadmeVerified": true
 }
