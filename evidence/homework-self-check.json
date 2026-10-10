@@ -30,7 +30,7 @@
   },
   "apkSha256": "35f9108283de4ee921868e3816af7a2441e4d365e3832a69fdac5a9387d475dd",
   "deliveryChecksPassed": true,
-  "deliveryCheckCount": 106,
+  "deliveryCheckCount": 82,
   "partnerForkVerified": true,
   "partnerPullRequestMerged": true,
   "partnerPullRequest": "https://github.com/k0n0y/102401314-102401323/pull/1",
@@ -41,9 +41,11 @@
       "mainSections": 10,
       "images": 11,
       "emptyPersonalParagraphs": 0,
-      "personalExpressionDrafted": true,
-      "personalExpressionConfirmed": false,
-      "actualPersonalPspConfirmed": false,
+      "personalExpressionConfirmed": true,
+      "actualPersonalPspConfirmed": true,
+      "personalConfirmationSource": "user_message",
+      "personalPspMethod": "retrospective_estimate",
+      "personalPspMinutes": 1010,
       "publishedArticleVerified": false
     },
     {
@@ -52,29 +54,32 @@
       "mainSections": 10,
       "images": 11,
       "emptyPersonalParagraphs": 0,
-      "personalExpressionDrafted": true,
-      "personalExpressionConfirmed": false,
-      "actualPersonalPspConfirmed": false,
+      "personalExpressionConfirmed": true,
+      "actualPersonalPspConfirmed": true,
+      "personalConfirmationSource": "user_message",
+      "personalPspMethod": "retrospective_estimate",
+      "personalPspMinutes": 1050,
       "publishedArticleVerified": false
     }
   ],
-  "actualPersonalPspVerified": false,
+  "actualPersonalPspVerified": true,
   "studentAppManualAcceptanceVerified": false,
   "classSubmissionVerified": false,
   "pairingFormVerified": false,
   "remaining": [
-    "成员确认个人表达和实际投入",
     "博客园预览与发表并取得文章链接",
     "课程提交成功及班级结对表填写"
   ],
   "githubCommitScreenshotUpdated": true,
   "githubScreenshotCapturedAt": "2026-10-10T06:24:55.505Z",
   "publicationSupplement": {
-    "checkedAtUtc": "2026-10-10T06:42:28.572221+00:00",
-    "sourceCommitBeforeSupplementCommit": "8ff1e7c65e1b3db23f44a95be87e23c771c4d756",
+    "checkedAtUtc": "2026-10-10T06:48:01.503951+00:00",
+    "sourceCommitBeforeSupplementCommit": "7f260dc1300eb4908724396de026c11221f49a0f",
     "publicImageLinksVerified": 11,
     "personalDraftsFilled": true,
     "collaborationProblemFilledFromEvidence": true,
     "cnblogsPreviewVerified": false
-  }
+  },
+  "personalPspVerificationBasis": "user_confirmed_retrospective_estimate",
+  "continuousTimeMeasurementVerified": false
 }

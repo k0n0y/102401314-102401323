@@ -10,6 +10,9 @@ import subprocess
 
 root = Path(__file__).resolve().parents[1]
 docs = root / 'docs'
+review = json.loads((root / 'evidence/materials-review-confirmation.json').read_text(encoding='utf-8'))
+assert review['source'] == 'user_message'
+assert review['personalExpressionConfirmed'] and review['personalPspConfirmedByUser']
 articles = []
 urls = {}
 for name in ['曾炜毅', '陈勇昊']:
@@ -18,8 +21,8 @@ for name in ['曾炜毅', '陈勇昊']:
     images = re.findall(r'!\[[^\]]*\]\(([^)]+)\)', text)
     assert text.count('\n## ') == 10 and text.count('```') % 2 == 0
     assert len(images) == 11 and len(set(images)) == 11
-    assert not re.search(r'【待(?:填写|核实)', text)
-    assert '待记录' in text and '不是已测量的实际耗时' in text
+    assert not re.search(r'【待(?:填写|核实)|待审核|代拟|待核对|待本人|尚未确认|未确认|待记录|拟定', text)
+    assert '回顾估计' in text
     for url in images:
         assert url.startswith('https://raw.githubusercontent.com/k0n0y/')
         local = docs / url.split('/docs/', 1)[1]
@@ -27,9 +30,11 @@ for name in ['曾炜毅', '陈勇昊']:
         urls[url] = local
     articles.append({'author': name, 'file': str(path), 'mainSections': 10,
                      'images': 11, 'emptyPersonalParagraphs': 0,
-                     'personalExpressionDrafted': True,
-                     'personalExpressionConfirmed': False,
-                     'actualPersonalPspConfirmed': False,
+                     'personalExpressionConfirmed': True,
+                     'actualPersonalPspConfirmed': True,
+                     'personalConfirmationSource': 'user_message',
+                     'personalPspMethod': review['pspMeasurementMethod'],
+                     'personalPspMinutes': review['pspMinutes'][name],
                      'publishedArticleVerified': False})
 
 def verify(item):
@@ -49,12 +54,12 @@ with ThreadPoolExecutor(max_workers=6) as pool:
     links = list(pool.map(verify, urls.items()))
 
 report = {'checkedAtUtc': datetime.now(timezone.utc).isoformat(),
-          'passed': True, 'scope': '正文结构、非空个人草稿及公开图片字节核验',
+          'passed': True, 'scope': '已审核正文结构、确认记录及公开图片字节核验',
           'articles': articles, 'publicImageLinks': links,
           'uniquePublicImages': len(links),
           'cnblogsPreviewVerified': False, 'classSubmissionVerified': False,
           'fullAssignmentComplete': False,
-          'remaining': ['成员确认个人表达和实际投入', '博客园预览与发表并取得文章链接',
+          'remaining': ['博客园预览与发表并取得文章链接',
                         '课程提交成功及班级结对表填写']}
 (root / 'evidence/publication-materials-check.json').write_text(
     json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -62,6 +67,9 @@ audit_path = root / 'evidence/homework-self-check.json'
 if audit_path.exists():
     audit = json.loads(audit_path.read_text(encoding='utf-8'))
     audit['blogs'] = articles
+    audit['actualPersonalPspVerified'] = True
+    audit['personalPspVerificationBasis'] = 'user_confirmed_retrospective_estimate'
+    audit['continuousTimeMeasurementVerified'] = False
     audit['publicationSupplement'] = {
         'checkedAtUtc': report['checkedAtUtc'],
         'sourceCommitBeforeSupplementCommit': subprocess.check_output(

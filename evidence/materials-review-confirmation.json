@@ -1,0 +1,14 @@
+{
+  "clientDate": "2026-10-10",
+  "source": "user_message",
+  "userStatement": "这些内容我已经全部审核过了，把待审核，代拟等字样去除",
+  "divisionReviewed": true,
+  "personalExpressionConfirmed": true,
+  "personalPspConfirmedByUser": true,
+  "pspMeasurementMethod": "retrospective_estimate",
+  "pspMinutes": {"曾炜毅": 1010, "陈勇昊": 1050},
+  "continuousTimeMeasurementVerified": false,
+  "studentAppManualAcceptanceVerified": false,
+  "blogPublicationVerified": false,
+  "classSubmissionVerified": false
+}

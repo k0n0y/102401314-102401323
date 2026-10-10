@@ -1,7 +1,7 @@
 {
-  "checkedAtUtc": "2026-10-10T06:42:28.572221+00:00",
+  "checkedAtUtc": "2026-10-10T06:48:01.503951+00:00",
   "passed": true,
-  "scope": "正文结构、非空个人草稿及公开图片字节核验",
+  "scope": "已审核正文结构、确认记录及公开图片字节核验",
   "articles": [
     {
       "author": "曾炜毅",
@@ -9,9 +9,11 @@
       "mainSections": 10,
       "images": 11,
       "emptyPersonalParagraphs": 0,
-      "personalExpressionDrafted": true,
-      "personalExpressionConfirmed": false,
-      "actualPersonalPspConfirmed": false,
+      "personalExpressionConfirmed": true,
+      "actualPersonalPspConfirmed": true,
+      "personalConfirmationSource": "user_message",
+      "personalPspMethod": "retrospective_estimate",
+      "personalPspMinutes": 1010,
       "publishedArticleVerified": false
     },
     {
@@ -20,9 +22,11 @@
       "mainSections": 10,
       "images": 11,
       "emptyPersonalParagraphs": 0,
-      "personalExpressionDrafted": true,
-      "personalExpressionConfirmed": false,
-      "actualPersonalPspConfirmed": false,
+      "personalExpressionConfirmed": true,
+      "actualPersonalPspConfirmed": true,
+      "personalConfirmationSource": "user_message",
+      "personalPspMethod": "retrospective_estimate",
+      "personalPspMinutes": 1050,
       "publishedArticleVerified": false
     }
   ],
@@ -121,7 +125,6 @@
   "classSubmissionVerified": false,
   "fullAssignmentComplete": false,
   "remaining": [
-    "成员确认个人表达和实际投入",
     "博客园预览与发表并取得文章链接",
     "课程提交成功及班级结对表填写"
   ]

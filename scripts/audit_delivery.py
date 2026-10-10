@@ -29,9 +29,17 @@ for file in (root/'docs').glob('*.md'):
     for image in re.findall(r'!\[[^\]]*\]\(([^)]+)\)',text):
         if not image.startswith('http'):check((file.parent/image).is_file(),'博客图片可定位：'+image)
 check((root/'docs/images/github-commits.png').exists(),'实际 GitHub 提交记录截图存在')
-check('待记录' in (root/'docs/PSP.md').read_text(encoding='utf-8'),'PSP 实际保留待本人记录标识')
+psp_text=(root/'docs/PSP.md').read_text(encoding='utf-8')
+review=json.loads((root/'evidence/materials-review-confirmation.json').read_text(encoding='utf-8'))
+check(review['personalPspConfirmedByUser'] and '回顾估计' in psp_text,'PSP 已获用户审核确认，并标明回顾估计的统计方式')
 check((root/'server/server.cjs').exists() and (root/'启动共享服务.cmd').exists(),'共享服务及启动入口可交付')
 check('1.1.0' in (root/'README.md').read_text(encoding='utf-8'),'README指向当前共享版')
 report={'passed':True,'checks':checks,'unitTests':reports['unit-tests.json']['tests'],'browserChecks':len(reports['browser-network-ui.json']['checks']),'androidChecks':len(reports['android-network-ui.json']['checks']),'apkSha256':reports['apk-verification.json']['sha256']}
 (root/'evidence/delivery-audit.json').write_text(json.dumps(report,indent=2,ensure_ascii=False),encoding='utf-8')
+self_check_path=root/'evidence/homework-self-check.json'
+if self_check_path.exists():
+    self_check=json.loads(self_check_path.read_text(encoding='utf-8'))
+    self_check['deliveryChecksPassed']=True
+    self_check['deliveryCheckCount']=len(checks)
+    self_check_path.write_text(json.dumps(self_check,indent=2,ensure_ascii=False),encoding='utf-8')
 print(f'DELIVERY AUDIT PASS: {len(checks)} checks; {report["unitTests"]} unit tests, {report["browserChecks"]} browser checks, {report["androidChecks"]} Android checks')
