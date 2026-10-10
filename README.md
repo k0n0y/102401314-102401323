@@ -87,7 +87,7 @@ python scripts/build_apk.py --sdk C:\Android\Sdk --jdk C:\Java\jdk-17
 
 运行日期：2026-10-09
 
-- 操作系统：Windows 10 Home China 25H2（build 26200）
+- 操作系统：Windows 11 25H2（build 26200；系统名称按版本与构建号校正）
 - Node.js：v24.19.0
 - npm：当前运行环境未提供 `npm` 可执行文件；项目没有第三方 npm 依赖，因此使用 Node.js 原生命令运行测试
 
