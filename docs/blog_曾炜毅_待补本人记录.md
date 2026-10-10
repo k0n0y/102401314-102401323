@@ -26,7 +26,7 @@
 
 双方共同负责需求确认、接口与状态约定、App 和服务联调、关键代码复审及总结。曾炜毅侧重从使用者流程检查测试是否覆盖实际操作，陈勇昊侧重从异常和权限条件检查 App 行为是否正确；发现问题后共同复核修改结果。
 
-协作安排：曾炜毅维护主仓库，陈勇昊使用 Cgg0024 账号创建的 [作业 fork](https://github.com/Cgg0024/102401314-102401323) 已核对来源。在实际修改或补充测试后，由队友提交 Pull Request。两人分别记录自己的 PSP 实际耗时，填写个人总结和对队友的评价，并各自发布、提交作业博客。PR、具体贡献和个人验收仍待完成或核实。
+协作安排：曾炜毅维护主仓库，陈勇昊使用 Cgg0024 账号创建的 [作业 fork](https://github.com/Cgg0024/102401314-102401323) 已核对来源。该账号已在 [PR #1](https://github.com/k0n0y/102401314-102401323/pull/1) 中提交 README 运行记录贡献，具体记录及复审意见见结对协作记录.md。核对时 PR 尚未合并，环境名称待修正。两人仍需确认其他实际参与，分别记录个人耗时、个人总结和队友评价，并各自发布、提交作业博客。
 
 【待核实：两位成员实际承担的任务及相应 commit、PR、复审或操作记录。】
 
@@ -236,6 +236,7 @@ assert.equal(result.status,403);
 [当前提交记录](https://github.com/k0n0y/102401314-102401323/commits/main/)。材料生成时的真实Git记录如下，后续提交以仓库为准：
 
 ```text
+3878fc2 docs: record verified partner fork and pending pull request
 b4938eb docs: add clearly labeled personal PSP reference allocations
 e4f64b2 docs: draft module-based pairing responsibilities for both blog posts
 0030e7b docs: fill confirmed teammate blog homepages in both drafts
@@ -245,12 +246,27 @@ ef3e2f8 docs: refresh published commit evidence and final shared workflow
 b1cead4 docs: deliver shared APK setup blog drafts and verification evidence
 7b22b2c test: verify cross-client sync authorization offline errors and APK restart
 3478c6d feat: add shared SQLite service and device-authorized Android sync
-e24fca7 docs: add real GitHub history capture final APK audit and packaging instructions
 ```
 
 ![真实GitHub提交页](images/github-commits.png)
 
-队友的公开 fork 已核对：[Cgg0024/102401314-102401323](https://github.com/Cgg0024/102401314-102401323)，来源为作业主仓库。核对时 main 分支与主仓库一致，新增贡献和 PR 仍待完成。【待填写：真实 PR 链接】。队友应在自己的账号做实际改进并提交 PR。两人需分别发布博客并完成班级表登记。
+### Fork 与 Pull Request
+
+陈勇昊使用的 GitHub 账号为 Cgg0024，其 [fork 仓库](https://github.com/Cgg0024/102401314-102401323) 来源已经核对为作业主仓库。随后该账号从 `docs-add-run-result` 分支向主仓库 `main` 提交了 [PR #1：docs: add verified run results](https://github.com/k0n0y/102401314-102401323/pull/1)。
+
+PR 对应 [提交 e2f0ac2](https://github.com/k0n0y/102401314-102401323/commit/e2f0ac20a5dc0e33b7a2b87e5b95d8b142137478)，GitHub 记录的提交账号为 Cgg0024。核对时仅修改 README.md，新增 126 行，内容包括运行环境、无 npm 时的 Node 测试命令、55 项测试的输出，以及共享服务启动和健康接口检查步骤。这是本次已经能通过仓库核对的文档贡献，不能据此推断其完成了全部服务代码或 App 人工验收。
+
+README 记录报告 Node.js v24.19.0、55/55 测试通过、健康接口 HTTP 200；这些是队友提交的运行结果，与仓库中原有的自动验证记录分别说明。目前没有在队友机器上独立复现该环境，也没有把服务健康检查当成安卓交互验收。
+
+### PR 状态与复审
+
+核对时 PR 为 **Open，尚未合并**。源码、APK 和现有自动测试未由这个 PR 修改；PR 内容暂时仍位于队友分支，主仓库记录其链接不代表改动已经合入。
+
+复审发现环境名称需要核对：README 写成“Windows 10 Home China 25H2（build 26200）”，而 [微软发布信息](https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information) 把 25H2、build 26200 列在 Windows 11 下。建议队友在实际测试机器运行 `winver` 确认产品名称、版本和构建号，再修订同一个 PR。该问题涉及环境描述，不否定已存在的提交记录。
+
+PR 和提交的核验摘要见 `evidence/partner-pr-verification.json`。后续修正、复审和合并状态以 GitHub 当前记录为准。
+
+两人需分别发布博客并完成班级表登记。
 
 ## 九、实际问题、尝试与解决
 

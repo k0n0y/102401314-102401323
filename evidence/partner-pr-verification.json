@@ -1,0 +1,49 @@
+{
+  "verifiedAt": "2026-10-10 06:06:31 UTC",
+  "url": "https://github.com/k0n0y/102401314-102401323/pull/1",
+  "number": 1,
+  "title": "docs: add verified run results",
+  "author": "Cgg0024",
+  "state": "open",
+  "merged": false,
+  "mergedAt": null,
+  "baseRepository": "k0n0y/102401314-102401323",
+  "baseRef": "main",
+  "headRepository": "Cgg0024/102401314-102401323",
+  "headRef": "docs-add-run-result",
+  "headSha": "e2f0ac20a5dc0e33b7a2b87e5b95d8b142137478",
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 126,
+      "deletions": 0
+    }
+  ],
+  "commits": [
+    {
+      "sha": "e2f0ac20a5dc0e33b7a2b87e5b95d8b142137478",
+      "message": "docs: add verified run results",
+      "author": "Cgg0024",
+      "url": "https://github.com/k0n0y/102401314-102401323/commit/e2f0ac20a5dc0e33b7a2b87e5b95d8b142137478"
+    }
+  ],
+  "verifiedContribution": "README run-environment, test-command/output and service-health documentation",
+  "partnerReportedResults": {
+    "nodeVersion": "v24.19.0",
+    "testsPassed": 55,
+    "testsFailed": 0,
+    "healthHttpStatus": 200
+  },
+  "independentlyReproducedPartnerEnvironment": false,
+  "reviewNotes": [
+    {
+      "file": "README.md",
+      "issue": "Windows 10 Home China 25H2 (build 26200) product-name and version/build do not match",
+      "reference": "https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information",
+      "suggestion": "Confirm using winver on the tested machine and correct the product name."
+    }
+  ],
+  "appManualAcceptanceVerified": false,
+  "classSubmissionVerified": false
+}

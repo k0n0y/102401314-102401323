@@ -8,6 +8,8 @@ docs = root / 'docs'
 team = json.loads((docs/'team.json').read_text(encoding='utf-8'))
 blog_homepages = {member['name']: member['blogHomepage'] for member in team['members']}
 partner_fork = team['collaboration']['partnerFork']
+partner_pr = team['collaboration']['partnerPullRequest']
+collaboration_record = (docs/'结对协作记录.md').read_text(encoding='utf-8').split('\n', 1)[1].strip()
 division = (docs/'分工安排.md').read_text(encoding='utf-8').split('\n', 1)[1].strip()
 time_reference = (docs/'PSP耗时参考草稿.md').read_text(encoding='utf-8').split('\n', 1)[1].strip()
 unit = json.loads((root/'evidence/unit-tests.json').read_text(encoding='utf-8'))
@@ -287,9 +289,9 @@ test('乙即使知道甲的信息编号也不能更新状态', async () => {{
 | --- | --- |
 | 主仓库 | [102401314-102401323]({repo}) |
 | 另一成员真实 fork | [Cgg0024/102401314-102401323]({partner_fork}) |
-| 有实际贡献的 Pull Request | 【待填写：真实 PR 链接】 |
+| 有实际贡献的 Pull Request | [PR #1：补充运行结果]({partner_pr}) |
 
-已核对 Cgg0024 创建的公开 fork，其来源是 k0n0y/102401314-102401323。核对时两仓库 main 分支内容一致，尚未确认队友的新增贡献或 PR；队友需要在本人账号完成实际修改、提交并发起 PR，再补充对应链接。
+{collaboration_record}
 
 ## 九、遇到的问题、尝试与解决
 
@@ -365,7 +367,7 @@ guide = '''# 两份博客发布前补充与图片对照
 1. 两人的博客主页已填入；发表后补充本人和队友本次文章链接。
 2. 分工安排已拟好并填入两份稿件；核对两人实际参与，补充对应记录。参见分工安排.md。
 3. 两人的耗时参考分配已补入正文：曾炜毅 1010 分钟、陈勇昊 1050 分钟。参见 PSP耗时参考草稿.md，逐项核对本人实际投入后再更新实际栏和偏差说明；事后参考不能冒充计时记录或编码前个人预估。
-4. 队友的正确 fork 已核对并填入稿件；实际贡献与 PR 链接仍待补充。
+4. 队友的 fork、README 贡献和 PR #1 已核对并填入稿件；PR 环境名称待队友核对修正，合并状态以 GitHub 当前页面为准。
 5. 本人的结对困难、队友一项优点与改进建议、个人总结。
 
 在编辑器搜索“【待填写”和“【待核实”，逐项补齐；发布前检查是否仍有待填标记。技术数据不要改成实体手机或公网已通过。
